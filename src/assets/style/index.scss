@@ -1,0 +1,44 @@
+//全局变量
+$appBgColor:#F3F9FF;
+$appBgGrayColor:#FEFEFE;
+$moduleBgColor:#FFFFFF;
+$colorBolid:#353746;
+$colorNormal:#C4D6E6;
+$colorHL:#0185FF;
+$colorWarn:#FF3216;
+$colorpinkWarn:#FFF2F2;
+$fontNormalSize:16px;
+$fontBigSize:21px;
+$boxShadow:
+0.6px 0.6px 1.7px rgba(0, 0, 0, 0.018),
+1.3px 1.4px 4.1px rgba(0, 0, 0, 0.024),
+2.5px 2.6px 7.8px rgba(0, 0, 0, 0.029),
+4.5px 4.7px 13.8px rgba(0, 0, 0, 0.035),
+8.4px 8.8px 25.9px rgba(0, 0, 0, 0.044),
+20px 21px 62px rgba(0, 0, 0, 0.07)
+;
+$animTime: .3s;
+$leftDistance:3%;
+$appMainDistance:0%;
+
+//字体点击之后样式
+.fontSelected {
+    font-weight: bold;
+    color:$colorHL;
+   
+}
+//字体未被点击样式
+.fontNormal{
+    font-weight: bold;
+    color: $colorNormal;
+   
+}
+
+
+
+
+
+ 
+
+
+
