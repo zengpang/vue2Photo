@@ -63,9 +63,7 @@ export default {
         margin-right: 10px;
         color: $colorBolid;
       }
-    }
-
-    ;
+    };
 
     .imgSlider {
       position: absolute;

@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3786935 */
+  src: 
+       url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAARQAAsAAAAACNAAAAQDAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGYACDHAqFAIQoATYCJAMQCwoABCAFhGcHRBusB8iOw8YxLWUUyYnXCMoxci/JA4AiLqHr+/J4IBCGcHxdJZKtEeQIhPv/yTl/CRMtliKWmWHqoU1ST5cGmMsVdZse2W7z4x5/3K94i7YB69kCQFbS4gdbb12wrOuyBL85P/cbxi4u4zYCtRZwobLOJygKzh7AWTnoUaU1B2FxHBBROBxndUoJNVQrK+tuLOIGHCFdVFkGcN39+fgFFnGcpCLTjrJ+l7cAxg/g4Bby5PAJQP4IdpMAJydUIGNqZobYU27bBvFjUxC1eRFVywCOVEv02qd5cOvwEAtWJavWoySB/3lRSZPVQ9ySeOYrmCwSXzVZBF9v6WSIKdOrUYkPANEKVP39LEyiAz3j5KiXtRmzG7W9bVCid3YosXt77phdxS7mBbwMXhEbXkZW/643pvHp+8vj0TUVx3N5nNx39z1BOZy7qP4OaINhwfbVqPr5xeu8xs7Hk7F1nKeNte+0OFrZWlHD2zvO6MjOnmvs2N75SheKN7q77SRy22Vyck69b4qnnYl5uWXGZa6xTUsL12B5x4OxqOx8TxpKItoc7Tzthm+3i7+r7cwtm6Sank6QjaXvnw8TDR2ehAmyq1/f+ByNhqMRaBT64AEasIkkypGERzlpQVARvh0eZkAbSHS3vKrqkCPWh2yb7Wv65USY5ujfhjZYpMH8f0Q4mDebQfgGLjj2v2ABPl9u1FRvBpjb9MrSknIP4Xm8XlnJ+vmTssjick8nJJjoop9R7jwHNi1JiWsyygCeJsvBDHf04Mrq0Hlm/2PjJQuLocQth1ZWloxl+tKh89GEVyTknNYo0DhlB/6/32jQUrJDvGXmqlfV9egXLW4fwPa5lLgh+rRgt/2MzptDJ3WJP5x3e4W6k8YUV2KX8+O813mJf3YMKADmm5BdRIBpOch3RJ4oRiBP/hx/48K9zclUrtO/46cK+FJzvB/WzeeoQj4E8HL5tXm/gjypJmKR/ZSSJzIFv5fi9L2MJNTqRt59ilZf+xDcZp7tqNYWQlKlD7JqA6iCm4AKdRZBpWprodYk7+112iggotRgxHMAoVkDJI1eQtZsDlVwe1Ch0zeo1Ow/1NoaZw6rMxJ8T4bAWUKApd/FRHxaThpK1h00gqAypDiTFY4hGKUIBjFzE7Nk0peQE0wXS5SZlAXLkhjJ0DLMh56NkEppTMHQYoLPmghZVuFgakrmvYgJn5aBJwYBxyIIYNLdhRHho8mRNjIb/30RCJQMUjimJirGwlBiLhocY86EWQ2Ur0xeq+FMhitlolhgsUg8jcSgyWB8ZAtBqsdoGEX+ODECH8uEsEVEwYEpQiLrykzGV8gubwvU0laXSJGjRIXa4wTO8IU7v0JVKpJLjuIMQ2cpAQAA') format('woff2'),
+       url('iconfont.woff?t=1669290040771') format('woff'),
+       url('iconfont.ttf?t=1669290040771') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-searchicon:before {
+  content: "\e613";
+}
+
+.icon-link:before {
+  content: "\e600";
+}
+
+.icon-arrows:before {
+  content: "\e62d";
+}
+

@@ -1,0 +1,30 @@
+{
+  "id": "3786935",
+  "name": "vue2photo",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2357495",
+      "name": "搜索框",
+      "font_class": "searchicon",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "77403",
+      "name": "链接",
+      "font_class": "link",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "2674928",
+      "name": "箭头 右",
+      "font_class": "arrows",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    }
+  ]
+}

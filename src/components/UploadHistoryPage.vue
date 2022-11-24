@@ -5,10 +5,11 @@
         <main class="mainContent">
             <header>
                 <h2>{{ pageTitle }}</h2>
+                <HistorySearch></HistorySearch>
             </header>
             <main>
                 <h2>已上传文件</h2>
-               <HistoryItem v-for="uploaditem in uploadHistorys" :key="uploaditem" :imgName="uploaditem.imgName"></HistoryItem>
+               <HistoryItem v-for="(uploaditem,uploadindex) in uploadHistorys" :key="uploadindex" :imgName="uploaditem.imgName"></HistoryItem>
             </main>
             <footer>
                 
@@ -25,16 +26,18 @@
     </div>
 </template>
 <script>
-import HistoryItem from '../components/HistoryItem.vue';
+import HistorySearch from '../components/HistorySearch';
+import HistoryItem from '../components/HistoryItem';
 export default {
     name: "UploadHistoryPage",
     data() {
         return {
             pageTitle: "上传历史",
-            uploadHistorys:[{imgName:"图片名字1",imgSize:"513KB"},{imgName:"图片名字2",imgSize:"513KB"},{imgName:"图片名字3",imgSize:"513KB"},{imgName:"图片名字3",imgSize:"513KB"},{imgName:"图片名字3",imgSize:"513KB"},{imgName:"图片名字3",imgSize:"513KB"}]
+            uploadHistorys:[{imgName:"图片名字.png",imgSize:"513KB"},{imgName:"图片名字2.png",imgSize:"513KB"},{imgName:"图片名字3.jpg",imgSize:"513KB"},{imgName:"图片名字3",imgSize:"513KB"},{imgName:"图片名字3",imgSize:"513KB"},{imgName:"图片名字3",imgSize:"513KB"}]
         }
     },
     components:{
+        HistorySearch,
         HistoryItem
     }
 }
@@ -69,6 +72,9 @@ $appSidebarWidth: 39%;
         height: 100%;
         width: $appMainWidth;
         position: relative;
+        h2{
+            height: 20%;
+        }
         header {
             background-color: $appBgGrayColor;
             width: 94%;
@@ -96,9 +102,7 @@ $appSidebarWidth: 39%;
             border-radius: 6px;
             box-shadow: $boxShadow;
            
-        }
-
-        ;
+        };
     }
 
 

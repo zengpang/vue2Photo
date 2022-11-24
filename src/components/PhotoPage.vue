@@ -2,6 +2,7 @@
   <div class="photoPage">
     <header>
       <h2>{{ pageTitle }}</h2>
+      
     </header>
     <main>
       <PhotoAlbum></PhotoAlbum>
@@ -14,7 +15,8 @@
     
 <script>
 import BottomSidebar from './BottomSidebar'
-import PhotoAlbum from './PhotoAlbum.vue'
+import PhotoAlbum from './PhotoAlbum'
+
 export default {
   name: 'HelloWorld',
   data() {
@@ -25,7 +27,6 @@ export default {
   },
   components: {
     BottomSidebar,
-
     PhotoAlbum
   }
 }
