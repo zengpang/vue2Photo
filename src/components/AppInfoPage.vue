@@ -52,7 +52,7 @@
     width: 100%;
     height: 80%;
     
-    background-color: $moduleBgColor;
+    background-color: $appBgGrayColor;
     border-radius: 6px;
 
     box-shadow: $boxShadow;
