@@ -34,7 +34,7 @@ export default {
 <style scoped lang="scss">
 .photoAlbum {
   display: flex;
-  background-color: brown;
+ 
   position: absolute;
   flex-direction: column;
   width: 96%;
@@ -50,7 +50,7 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: bisque;
+   
 
     label {
       font-size: $fontNormalSize;
@@ -95,7 +95,7 @@ export default {
   main {
     height: 90%;
     width: 100%;
-    background-color: cadetblue;
+   
     display: grid;
     grid-template-columns: auto auto auto auto auto;
     grid-template-rows: auto auto auto auto;

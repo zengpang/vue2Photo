@@ -7,10 +7,11 @@
                 <h2>{{ pageTitle }}</h2>
             </header>
             <main>
-
+                <h2>已上传文件</h2>
+               <HistoryItem v-for="uploaditem in uploadHistorys" :key="uploaditem" :imgName="uploaditem.imgName"></HistoryItem>
             </main>
             <footer>
-
+                
             </footer>
         </main>
         <aside class="sidebar">
@@ -18,18 +19,23 @@
 
             </header>
             <main>
-
+            
             </main>
         </aside>
     </div>
 </template>
 <script>
+import HistoryItem from '../components/HistoryItem.vue';
 export default {
     name: "UploadHistoryPage",
     data() {
         return {
-            pageTitle: "上传历史"
+            pageTitle: "上传历史",
+            uploadHistorys:[{imgName:"图片名字1",imgSize:"513KB"},{imgName:"图片名字2",imgSize:"513KB"},{imgName:"图片名字3",imgSize:"513KB"},{imgName:"图片名字3",imgSize:"513KB"},{imgName:"图片名字3",imgSize:"513KB"},{imgName:"图片名字3",imgSize:"513KB"}]
         }
+    },
+    components:{
+        HistoryItem
     }
 }
 </script>
@@ -43,7 +49,7 @@ $appSidebarWidth: 39%;
     left: $leftDistance;
     right: $leftDistance;
     flex-direction: row;
-    border: 1px red solid;
+ 
     top: 2%;
     width: 94%;
     height: 92%;
@@ -65,10 +71,12 @@ $appSidebarWidth: 39%;
         position: relative;
         header {
             background-color: $appBgGrayColor;
-            width: 100%;
-            border: 1px rgb(12, 183, 199) solid;
+            width: 94%;
+            padding-left:  $leftDistance;
+            padding-right: $leftDistance;
+           
             display: flex;
-            height: 17.5%;
+            height: 14%;
             flex-direction: column;
             border-radius: 6px;
             box-shadow: $boxShadow;
@@ -78,14 +86,16 @@ $appSidebarWidth: 39%;
             display: flex;
             position: relative;
             margin-top: 5px;
-            width: 100%;
-
-            height: 80%;
-            border: 1px rgb(197, 13, 163) solid;
+            width: 94%;
+            padding-left:  $leftDistance;
+            padding-right: $leftDistance;
+            flex-direction: column;
+            height: 84%;
+            
             background-color: $appBgGrayColor;
             border-radius: 6px;
-
             box-shadow: $boxShadow;
+           
         }
 
         ;
