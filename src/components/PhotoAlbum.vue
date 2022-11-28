@@ -1,11 +1,11 @@
 <template>
   <div class="photoAlbum">
-    <header><label>总共有<a>41张</a>全部图片</label>
+    <header><label>总共有<a>{{imageSum}}张</a>全部图片</label>
       <div class="imgSlider">单页显示数量<a>{{ pageShowNumber }}</a><input type="range" value="20" min="1" max="25"
           id="pageShowImgInput" @input="getPageShowNumber" /></div>
     </header>
     <main>
-      <ImageItem v-for="item in imageItems" :key="item"></ImageItem>
+      <ImageItem v-for="item in pageShowNumber" :key="item"></ImageItem>
     </main>
     
   </div>
@@ -13,13 +13,13 @@
 
 <script>
 import ImageItem from './ImageItem'
+import agency from'./agency.js'
 export default {
   name: "PhotoAlbum",
   data() {
     return {
-      imageItems: 20,
-      pageShowNumber: 20,
-      weightFact:'a'
+      pageShowNumber: 20,//单页显示图片
+      imageSum:41 //图片总数量
     }
   },
   components: {
@@ -27,12 +27,23 @@ export default {
   },
   methods: {
     getPageShowNumber(event) {
-      
       this.pageShowNumber = parseInt(document.getElementById("pageShowImgInput").value);
-      
-      this.imageItems=parseInt(document.getElementById("pageShowImgInput").value);
-
     }
+  },
+  watch:{
+    pageShowNumber(newShowNum)
+    {
+    
+      agency.$emit("pageNumberUpdate",{imgTotals:this.imageSum,imgShows:newShowNum});
+    },
+    imageSum(newSum)
+    {
+      
+      agency.$emit("pageNumberUpdate",{imgTotals:newSum,imgShows:this.pageShowNumber});
+    }
+  },
+  mounted(){
+    agency.$emit("pageNumberUpdate",{imgTotals:this.imageSum,imgShows:this.pageShowNumber});
   }
 }
 </script>

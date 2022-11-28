@@ -17,7 +17,6 @@ export default {
     return {
       TabLinks: [{ tabname: '·首页', tabLink: 'homePage' }, { tabname: '·上传历史', tabLink: 'hisotryPage' }, { tabname: '·应用信息', tabLink: 'appInfo' }],
       isSelected: { '·首页': true, '·上传历史': false, '·应用信息': false },
-      
     }
   },
   methods: {

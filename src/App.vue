@@ -9,6 +9,7 @@
 <script>
 import HeaderTab from './components/HeaderTab'
 import PhotoPage from './views/PhotoPage'
+
 export default {
   name: 'App',
   components: {

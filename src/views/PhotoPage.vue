@@ -5,10 +5,10 @@
       
     </header>
     <main>
-      <PhotoAlbum></PhotoAlbum>
+      <PhotoAlbum ref="PhotoAlbum"></PhotoAlbum>
     </main>
     <footer>
-      <BottomSidebar></BottomSidebar>
+      <BottomSidebar ref="BottomSidebar"></BottomSidebar>
     </footer>
   </div>
 </template>

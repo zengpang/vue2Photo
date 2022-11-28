@@ -9,6 +9,7 @@ $colorWarn:#FF3216;
 $colorpinkWarn:#FFF2F2;
 $fontNormalSize:16px;
 $fontBigSize:21px;
+$bottomBtnColor:#799EC0;
 $boxShadow:
 0.6px 0.6px 1.7px rgba(0, 0, 0, 0.018),
 1.3px 1.4px 4.1px rgba(0, 0, 0, 0.024),
@@ -43,6 +44,9 @@ $bottomDistance:0.5%;
 //字体未被点击样式(纤细)
 .fontSlenderNormal{
     color: $colorNormal;
+}
+.fontBottomBtnNormal{
+    color: $bottomBtnColor;
 }
 
 

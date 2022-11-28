@@ -1,72 +1,112 @@
 
 <template>
-   <div class="bottomSidebar">
-       <h1 class="previousBtn">&#xe62d;</h1>
-       <label class="fontSlenderNormal " v-for="pageNumber in pageNumbers" :ref="pageNumber" @click="pageChangeBtn(pageNumber)" >{{pageNumber}}</label>
-       <h1 class="nextBtn">&#xe62d;</h1>
-   </div>
+    <div class="bottomSidebar">
+        <h1 class="previousBtn" @click="pageNAndPBtn(-1)">&#xe62d;</h1>
+        <label class="fontBottomBtnNormal " v-for="pageNumber in pageNumbers" :ref="bottomBtnidStr + pageNumber"
+            @click="pageChangeBtn(pageNumber)" >{{ pageNumber }}</label>
+        <h1 class="nextBtn" @click="pageNAndPBtn(1)">&#xe62d;</h1>
+        
+    </div>
 </template>
 
 <script>
-export default{
-  name:"BottomSidebar",
-  data(){
-    return{
-        pageNumbers:13,
-        selectPageNumber:1
-    }
-  },
-  methods:{
-    //选中页面
-    selectPage()
+import agency from'./agency.js'
+export default {
+    name: "BottomSidebar",
+    data() {
+        return {
+            pageNumbers: 13,//总页码
+            selectPageNumber: 1,//选中页面页码
+            bottomBtnidStr: 'pageBottombtn',//底边数字按钮ref唯一标识字符串
+      
+        }
+    },
+    methods: {
+      
+        //页面号码更新
+        // pageNumberUpdate(pageinfo)
+        // {
+           
+        // },
+        //选中页码更新
+        selectPageUpdate() {
+            for (let index = 1; index <= this.pageNumbers; index++) {
+
+                this.$refs[this.bottomBtnidStr + index][0].classList.remove("fontSelected");
+                this.$refs[this.bottomBtnidStr + index][0].classList.add("fontBottomBtnNormal");
+            }
+            this.$refs[this.bottomBtnidStr + this.selectPageNumber][0].classList.remove("fontBottomBtnNormal");
+            this.$refs[this.bottomBtnidStr + this.selectPageNumber][0].classList.add("fontSelected");
+        },
+        //页面切换点击事件
+        pageChangeBtn(pageNumber) {
+            this.selectPageNumber = pageNumber;
+            this.selectPageUpdate();
+
+        },
+        //页面上下页切换按钮点击事件
+        pageNAndPBtn(jumpPageNum) {
+            switch (true) {
+
+                case (this.selectPageNumber <= 1 && jumpPageNum < 0): {
+                    return;
+                };
+                case (this.selectPageNumber >= this.pageNumbers && jumpPageNum > 0): {
+                    return;
+                };
+
+            }
+
+            this.selectPageNumber += jumpPageNum;
+            this.selectPageUpdate();
+        }
+    },
+    created()
     {
-        for(let index=1;index<=this.pageNumbers;index++)
+    
+        agency.$on("pageNumberUpdate",(pageinfo)=>
         {
             
-            this.$refs[index][0].classList.remove("fontSelected"); 
-            this.$refs[index][0].classList.add("fontSlenderNormal"); 
-        }
-        this.$refs[this.selectPageNumber][0].classList.remove("fontSlenderNormal"); 
-        this.$refs[this.selectPageNumber][0].classList.add("fontSelected"); 
+            this.pageNumbers=Math.floor(pageinfo.imgTotals/pageinfo.imgShows);
+            console.log("执行更新"+this.pageNumbers);
+        })
     },
-    //页面切换点击事件
-    pageChangeBtn(pageNumber){
-         this.selectPageNumber=pageNumber;
-         this.selectPage();
-        
+    mounted() {
+        this.selectPageUpdate();
     }
-  },
-  mounted(){
-    this.selectPage();
-  }
+    
 }
 </script>
 
 <style scoped lang="scss">
-
-.bottomSidebar{
+.bottomSidebar {
     display: flex;
     position: relative;
     flex-direction: row;
     height: 100%;
     width: 100%;
     align-items: center;
-    label{
+
+    label {
         margin-left: $bottomDistance;
         margin-right: $bottomDistance;
+        transition: color $animTime;
         border: 2px solid transparent;
         cursor: pointer;
     }
 }
+
 @font-face {
-  font-family: "iconfont"; /* Project id 3786935 */
-  src: url('../assets/icon/iconfont.woff2?t=1669123716336') format('woff2'),
-       url('../assets/icon/iconfont.woff?t=1669123716336') format('woff'),
-       url('../assets/icon/iconfont.ttf?t=1669123716336') format('truetype');
+    font-family: "iconfont";
+    /* Project id 3786935 */
+    src: url('../assets/icon/iconfont.woff2?t=1669123716336') format('woff2'),
+        url('../assets/icon/iconfont.woff?t=1669123716336') format('woff'),
+        url('../assets/icon/iconfont.ttf?t=1669123716336') format('truetype');
 }
+
 .nextBtn {
     font-family: "iconfont";
-    color: $colorNormal;
+    color: $bottomBtnColor;
     position: relative;
     display: flex;
     font-size: $fontNormalSize;
@@ -75,19 +115,30 @@ export default{
     margin-right: $bottomDistance;
     border: 2px solid transparent;
     cursor: pointer;
+
 }
 
-.previousBtn{
+.nextBtn:hover {
+    font-weight: bold;
+    color: $colorHL;
+}
+
+.previousBtn {
     font-family: "iconfont";
     position: relative;
-    color: $colorNormal;
+    color: $bottomBtnColor;
     font-size: $fontNormalSize;
     transition: color $animTime;
     transform: rotateY(180deg);
     margin-left: 1%;
-    margin-right: 1%; 
+    margin-right: 1%;
     border: 2px solid transparent;
     cursor: pointer;
-}  
 
+}
+
+.previousBtn:hover {
+    font-weight: bold;
+    color: $colorHL;
+}
 </style>
