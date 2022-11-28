@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import PhotoPage from '../components/PhotoPage'
-import UploadHistoryPage from '../components/UploadHistoryPage'
-import AppInfoPage from '../components/AppInfoPage'
+import PhotoPage from '../views/PhotoPage'
+import UploadHistoryPage from '../views/UploadHistoryPage'
+import AppInfoPage from '../views/AppInfoPage'
 Vue.use(Router)
 
 export default new Router({

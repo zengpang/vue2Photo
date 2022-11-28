@@ -26,6 +26,7 @@ $jpgHintColor:#A473EA;
 $tgaHintColor:#59D149;
 $otherHintColor:#0e61f9;
 $generalOpacity:0.2;
+$bottomDistance:0.5%;
 //字体点击之后样式
 .fontSelected {
     font-weight: bold;
@@ -34,11 +35,15 @@ $generalOpacity:0.2;
 }
 //字体未被点击样式
 .fontNormal{
+    
     font-weight: bold;
     color: $colorNormal;
    
 }
-
+//字体未被点击样式(纤细)
+.fontSlenderNormal{
+    color: $colorNormal;
+}
 
 
 

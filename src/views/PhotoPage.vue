@@ -14,8 +14,8 @@
 </template>
     
 <script>
-import BottomSidebar from './BottomSidebar'
-import PhotoAlbum from './PhotoAlbum'
+import BottomSidebar from '../components/BottomSidebar'
+import PhotoAlbum from '../components/PhotoAlbum'
 
 export default {
   name: 'HelloWorld',

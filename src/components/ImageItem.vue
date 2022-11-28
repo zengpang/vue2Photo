@@ -1,6 +1,6 @@
 <template>
     <div class="imageItem">
-        <h3>内容</h3>
+        <h3>图片</h3>
     </div>
 </template>
 

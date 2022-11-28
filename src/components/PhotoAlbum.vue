@@ -1,12 +1,13 @@
 <template>
   <div class="photoAlbum">
     <header><label>总共有<a>41张</a>全部图片</label>
-      <div class="imgSlider">单页显示数量<a>{{ pageShowNumber }}</a><input type="range" value="20" min="1" max="64"
+      <div class="imgSlider">单页显示数量<a>{{ pageShowNumber }}</a><input type="range" value="20" min="1" max="25"
           id="pageShowImgInput" @input="getPageShowNumber" /></div>
     </header>
     <main>
       <ImageItem v-for="item in imageItems" :key="item"></ImageItem>
     </main>
+    
   </div>
 </template>
 
@@ -17,7 +18,8 @@ export default {
   data() {
     return {
       imageItems: 20,
-      pageShowNumber: 16
+      pageShowNumber: 20,
+      weightFact:'a'
     }
   },
   components: {
@@ -25,8 +27,11 @@ export default {
   },
   methods: {
     getPageShowNumber(event) {
-      //console.log("16");
-      this.pageShowNumber = document.getElementById("pageShowImgInput").value;
+      
+      this.pageShowNumber = parseInt(document.getElementById("pageShowImgInput").value);
+      
+      this.imageItems=parseInt(document.getElementById("pageShowImgInput").value);
+
     }
   }
 }
