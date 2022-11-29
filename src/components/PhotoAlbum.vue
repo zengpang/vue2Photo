@@ -1,25 +1,28 @@
 <template>
   <div class="photoAlbum">
-    <header><label>总共有<a>{{imageSum}}张</a>全部图片</label>
-      <div class="imgSlider">单页显示数量<a>{{ pageShowNumber }}</a><input type="range" value="20" min="1" max="25"
+    <header><label>总共有<a>{{ imageSum }}张</a>全部图片</label>
+      <div class="imgSlider">单页显示数量<a>{{ pageShowNumber }}</a><input type="range" value="20" min="4" max="25"
           id="pageShowImgInput" @input="getPageShowNumber" /></div>
     </header>
-    <main>
+    <main :style="imgTableStr" ref="imgTable">
       <ImageItem v-for="item in pageShowNumber" :key="item"></ImageItem>
     </main>
-    
+
   </div>
 </template>
 
 <script>
 import ImageItem from './ImageItem'
-import agency from'./agency.js'
+import agency from './agency.js'
 export default {
   name: "PhotoAlbum",
   data() {
     return {
       pageShowNumber: 20,//单页显示图片
-      imageSum:41 //图片总数量
+      imageSum: 41, //图片总数量
+      imgTableCol: 5,//列
+      imgTableRow: 4,//行
+      imgTableStr:'grid-template-columns:auto auto auto auto auto;grid-template-rows: auto auto auto auto;'
     }
   },
   components: {
@@ -28,29 +31,52 @@ export default {
   methods: {
     getPageShowNumber(event) {
       this.pageShowNumber = parseInt(document.getElementById("pageShowImgInput").value);
-    }
-  },
-  watch:{
-    pageShowNumber(newShowNum)
-    {
-    
-      agency.$emit("pageNumberUpdate",{imgTotals:this.imageSum,imgShows:newShowNum});
-    },
-    imageSum(newSum)
-    {
+      if (this.pageShowNumber <= ((this.imgTableCol - 1) * this.imgTableRow)) {
+        this.imgTableRow = Math.floor(Math.sqrt(this.pageShowNumber));
+        console.log(this.imgTableStr);
+        
+      }
       
-      agency.$emit("pageNumberUpdate",{imgTotals:newSum,imgShows:this.pageShowNumber});
+    
+
     }
   },
-  mounted(){
-    agency.$emit("pageNumberUpdate",{imgTotals:this.imageSum,imgShows:this.pageShowNumber});
+  watch: {
+    imgTableRow(newRow)
+    {
+      console.log(newRow);
+      this.imgTableCol = newRow + 1;
+      let imgTableColStr='grid-template-columns:';
+      let imgTableRowStr='grid-template-rows:';
+      for(let index=0;index<this.imgTableCol;index++)
+      {
+        imgTableColStr+="auto ";
+      }
+      for(let index=0;index<newRow;index++)
+      {
+        imgTableRowStr+="auto ";
+      }
+      
+      this.imgTableStr=imgTableColStr+";"+imgTableRowStr;
+    },
+    pageShowNumber(newShowNum) {
+
+      agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: newShowNum });
+    },
+    imageSum(newSum) {
+
+      agency.$emit("pageNumberUpdate", { imgTotals: newSum, imgShows: this.pageShowNumber });
+    }
+  },
+  mounted() {
+    agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageShowNumber });
   }
 }
 </script>
 <style scoped lang="scss">
 .photoAlbum {
   display: flex;
- 
+
   position: absolute;
   flex-direction: column;
   width: 96%;
@@ -66,12 +92,13 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-   
+
 
     label {
       font-size: $fontNormalSize;
       color: $colorNormal;
       position: relative;
+     
 
       a {
         font-weight: bold;
@@ -79,7 +106,9 @@ export default {
         margin-right: 10px;
         color: $colorBolid;
       }
-    };
+    }
+
+    ;
 
     .imgSlider {
       position: absolute;
@@ -109,10 +138,10 @@ export default {
   main {
     height: 90%;
     width: 100%;
-   
+    transition: all $animTime;
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    grid-template-rows: auto auto auto auto;
+    // grid-template-columns: auto auto auto auto auto;
+    // grid-template-rows: auto auto auto auto;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
   }

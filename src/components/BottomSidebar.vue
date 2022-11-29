@@ -67,8 +67,8 @@ export default {
         agency.$on("pageNumberUpdate",(pageinfo)=>
         {
             
-            this.pageNumbers=Math.floor(pageinfo.imgTotals/pageinfo.imgShows);
-            console.log("执行更新"+this.pageNumbers);
+            this.pageNumbers=Math.ceil(pageinfo.imgTotals/pageinfo.imgShows);
+            
         })
     },
     mounted() {
