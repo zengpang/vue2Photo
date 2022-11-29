@@ -6,7 +6,10 @@
 
 <script>
 export default {
-    name: "ImageItem"
+    name: "ImageItem",
+    methods:{
+        
+    }
     
 }
 
@@ -15,6 +18,7 @@ export default {
 .imageItem {
     background-color: burlywood;
     display: flex;
+    cursor: pointer;
     h3{
         display: inline;
         margin: auto;

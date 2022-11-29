@@ -4,7 +4,7 @@
       <div class="imgSlider">单页显示数量<a>{{ pageShowNumber }}</a><input type="range" value="20" min="4" max="25"
           id="pageShowImgInput" @input="getPageShowNumber" /></div>
     </header>
-    <main :style="imgTableStr" ref="imgTable">
+    <main :style="imgTableStr">
       <ImageItem v-for="item in pageShowNumber" :key="item"></ImageItem>
     </main>
 
@@ -31,12 +31,16 @@ export default {
   methods: {
     getPageShowNumber(event) {
       this.pageShowNumber = parseInt(document.getElementById("pageShowImgInput").value);
-      if (this.pageShowNumber <= ((this.imgTableCol - 1) * this.imgTableRow)) {
-        this.imgTableRow = Math.floor(Math.sqrt(this.pageShowNumber));
-        console.log(this.imgTableStr);
-        
+    
+      switch(true)
+      {
+        case(this.pageShowNumber <= ((this.imgTableCol - 1) * this.imgTableRow)):{
+          this.imgTableRow = Math.floor(Math.sqrt(this.pageShowNumber));
+        };break;
+        case(this.pageShowNumber >= ((this.imgTableCol + 1) * this.imgTableRow)):{
+          this.imgTableRow = Math.floor(Math.sqrt(this.pageShowNumber));
+        };break;
       }
-      
     
 
     }

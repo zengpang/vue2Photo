@@ -12,7 +12,7 @@
 export default {
   props: ['imgName'],
   name: "HistoryItem",
-
+  
 }
 </script>
 <style scoped lang="scss">
