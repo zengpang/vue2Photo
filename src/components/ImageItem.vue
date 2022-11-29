@@ -1,5 +1,5 @@
 <template>
-    <div class="imageItem">
+    <div class="imageItem" @click="imgitemBtn">
         <h3>图片</h3>
     </div>
 </template>
@@ -8,7 +8,10 @@
 export default {
     name: "ImageItem",
     methods:{
-        
+        imgitemBtn()
+        {
+            console.log("图片被点击");
+        }
     }
     
 }

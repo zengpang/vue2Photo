@@ -61,6 +61,12 @@ export default {
             this.selectPageUpdate();
         }
     },
+    watch:{
+         selectPageNumber(newPageNumber)
+         {
+           
+         }
+    },
     created()
     {
     

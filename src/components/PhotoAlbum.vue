@@ -14,6 +14,7 @@
 <script>
 import ImageItem from './ImageItem'
 import agency from './agency.js'
+ 
 export default {
   name: "PhotoAlbum",
   data() {
@@ -22,7 +23,7 @@ export default {
       imageSum: 41, //图片总数量
       imgTableCol: 5,//列
       imgTableRow: 4,//行
-      imgTableStr:'grid-template-columns:auto auto auto auto auto;grid-template-rows: auto auto auto auto;'
+      imgTableStr: 'grid-template-columns:auto auto auto auto auto;grid-template-rows: auto auto auto auto;'
     }
   },
   components: {
@@ -31,37 +32,46 @@ export default {
   methods: {
     getPageShowNumber(event) {
       this.pageShowNumber = parseInt(document.getElementById("pageShowImgInput").value);
-    
-      switch(true)
-      {
-        case(this.pageShowNumber <= ((this.imgTableCol - 1) * this.imgTableRow)):{
-          this.imgTableRow = Math.floor(Math.sqrt(this.pageShowNumber));
-        };break;
-        case(this.pageShowNumber >= ((this.imgTableCol + 1) * this.imgTableRow)):{
-          this.imgTableRow = Math.floor(Math.sqrt(this.pageShowNumber));
-        };break;
-      }
-    
 
+      switch (true) {
+        case (this.pageShowNumber <= ((this.imgTableCol - 1) * this.imgTableRow)): {
+          this.imgTableRow = Math.floor(Math.sqrt(this.pageShowNumber));
+        }; break;
+        case (this.pageShowNumber >= ((this.imgTableCol + 1) * this.imgTableRow)): {
+          this.imgTableRow = Math.floor(Math.sqrt(this.pageShowNumber));
+        }; break;
+      }
+
+
+    },
+    //读取图片
+    loadimg() {
+      console.log("正在获取图片");
+
+    },
+    //获取图片
+    async getimg()
+    {
+      this.$refs["LoadingDialog"].isL;
+      await new Promise(()=>{
+         
+      })
     }
   },
   watch: {
-    imgTableRow(newRow)
-    {
+    imgTableRow(newRow) {
       console.log(newRow);
       this.imgTableCol = newRow + 1;
-      let imgTableColStr='grid-template-columns:';
-      let imgTableRowStr='grid-template-rows:';
-      for(let index=0;index<this.imgTableCol;index++)
-      {
-        imgTableColStr+="auto ";
+      let imgTableColStr = 'grid-template-columns:';
+      let imgTableRowStr = 'grid-template-rows:';
+      for (let index = 0; index < this.imgTableCol; index++) {
+        imgTableColStr += "auto ";
       }
-      for(let index=0;index<newRow;index++)
-      {
-        imgTableRowStr+="auto ";
+      for (let index = 0; index < newRow; index++) {
+        imgTableRowStr += "auto ";
       }
-      
-      this.imgTableStr=imgTableColStr+";"+imgTableRowStr;
+
+      this.imgTableStr = imgTableColStr + ";" + imgTableRowStr;
     },
     pageShowNumber(newShowNum) {
 
@@ -102,7 +112,7 @@ export default {
       font-size: $fontNormalSize;
       color: $colorNormal;
       position: relative;
-     
+
 
       a {
         font-weight: bold;

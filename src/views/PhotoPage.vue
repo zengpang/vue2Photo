@@ -1,12 +1,16 @@
 <template>
+   
   <div class="photoPage">
+    
     <header>
+      
       <h2>{{ pageTitle }}</h2>
       <!-- <button>选中所有</button> -->
       <div @click="selectAllBtn" v-bind:class="{selectAlled:isSelectAll}" ><input type="checkbox" ref="SelectAllBtn" value="" />选中所有</div>
-
+      <button @click="TestDown" >下载测试</button>
     </header>
     <main>
+   
       <PhotoAlbum ref="PhotoAlbum"></PhotoAlbum>
     </main>
     <footer>
@@ -16,8 +20,11 @@
 </template>
     
 <script>
+
 import BottomSidebar from '../components/BottomSidebar'
 import PhotoAlbum from '../components/PhotoAlbum'
+import {FileManager} from'../models'
+
 export default {
   name: 'PhotoPage',
   data() {
@@ -36,6 +43,10 @@ export default {
     {
       this.isSelectAll=!this.isSelectAll;
       console.log(this.isSelectAll);
+    },
+    TestDown()
+    {
+      FileManager.download('http://lc-UQqK42CL.cn-n1.lcfile.com/bb6EBrhWrqXO5HfLdm6j6UmhrHcNGV34/Login_BackGround.jpg','Login_BackGround.jpg');
     }
   }
 }
@@ -61,8 +72,8 @@ export default {
     align-items: center;
   
     div {
-      height: 60%;
-      width: 13%;
+      height: 50px;
+      width: 180px;
       background-color: $moduleBgColor;
       font-size: $fontNormalSize;
       border-radius: 25px;
@@ -81,8 +92,8 @@ export default {
         margin-left: 0px;
         margin-bottom: 0px;
         margin-right: 8%;
-        height: 35%;
-        width: 10%;
+        height: 16px;
+        width: 16px;
         border: 2px solid $bottomBtnColor;
         border-radius: 3px;
         cursor: pointer;

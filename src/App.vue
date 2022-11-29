@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <LoadingDialog ref="LoadingDialog"></LoadingDialog>
     <HeaderTab></HeaderTab>
     <router-view/>
     
@@ -7,6 +8,7 @@
 </template>
 
 <script>
+import LoadingDialog from './dialog/loadingDialog.vue'
 import HeaderTab from './components/HeaderTab'
 import PhotoPage from './views/PhotoPage'
 
@@ -14,7 +16,8 @@ export default {
   name: 'App',
   components: {
     HeaderTab,
-    PhotoPage
+    PhotoPage,
+    LoadingDialog
   }
 }
 </script>
