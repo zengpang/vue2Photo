@@ -10,7 +10,7 @@
             <main>
                 <h2>已上传文件</h2>
                 <HistoryItem v-for="(uploaditem, uploadindex) in uploadHistorys" :key="uploadindex"
-                    :imgName="uploaditem.imgName"></HistoryItem>
+                    :imgName="uploaditem.imgName" :imgType="uploaditem.imgType"></HistoryItem>
             </main>
 
         </main>
@@ -37,7 +37,7 @@ export default {
     data() {
         return {
             pageTitle: "上传历史",
-            uploadHistorys: [{ imgName: "图片名字.png", imgSize: "513KB" }, { imgName: "图片名字2.png", imgSize: "513KB" }, { imgName: "图片名字3.jpg", imgSize: "513KB" }, { imgName: "图片名字3", imgSize: "513KB" }, { imgName: "图片名字3", imgSize: "513KB" }, { imgName: "图片名字3", imgSize: "513KB" }]
+            uploadHistorys: [{ imgName: "图片名字.png",imgType:'png', imgSize: "513KB" }, { imgName: "图片名字2.png",imgType:'png', imgSize: "513KB" }, { imgName: "图片名字3.jpg",imgType:'jpg', imgSize: "513KB" }, { imgName: "图片名字3",imgType:'png', imgSize: "513KB" }, { imgName: "图片名字3",imgType:'tga', imgSize: "513KB" }, { imgName: "图片名字3",imgType:'other', imgSize: "513KB" }]
         }
     },
     components: {

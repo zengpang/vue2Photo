@@ -64,7 +64,7 @@ export default {
     watch:{
          selectPageNumber(newPageNumber)
          {
-           
+            agency.$emit("pageNumberChange");
          }
     },
     created()
@@ -75,6 +75,9 @@ export default {
             
             this.pageNumbers=Math.ceil(pageinfo.imgTotals/pageinfo.imgShows);
             
+        });
+        agency.$on("getSelectNumber",(callback)=>{
+            callback(this.selectPageNumber);
         })
     },
     mounted() {

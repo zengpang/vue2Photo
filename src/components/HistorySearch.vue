@@ -21,7 +21,6 @@ export default {
     height: 35%;
     display: flex;
     flex-direction: row;
-    
     align-items : center;
     a{
       position: absolute;
@@ -39,19 +38,13 @@ export default {
         padding-left: 8%;
         padding-right: $leftDistance;
         outline: none;
-        
-    }
-
-    ;
-
+    };
     input::-webkit-input-placeholder {
-     
         /* placeholder颜色  */
         color: #aab2bd;
         /* placeholder字体大小  */
         font-size: $fontNormalSize;
         justify-self: center;
-
     }
 }
 </style>

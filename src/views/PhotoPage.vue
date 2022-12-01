@@ -7,7 +7,7 @@
       <h2>{{ pageTitle }}</h2>
       <!-- <button>选中所有</button> -->
       <div @click="selectAllBtn" v-bind:class="{selectAlled:isSelectAll}" ><input type="checkbox" ref="SelectAllBtn" value="" />选中所有</div>
-      <button @click="TestDown" >下载测试</button>
+      <!-- <button @click="TestDown" >下载测试</button> -->
     </header>
     <main>
    

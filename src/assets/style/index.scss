@@ -23,10 +23,13 @@ $leftDistance:3%;
 $appMainDistance:0%;
 $pngHintColor:#FF6230;
 $jpgHintColor:#A473EA;
-
 $tgaHintColor:#59D149;
 $otherHintColor:#0e61f9;
 $generalOpacity:0.2;
+$pngBgColor:rgba($color: $pngHintColor, $alpha:$generalOpacity);
+$jpgBgColor:rgba($color: $jpgHintColor, $alpha:$generalOpacity);
+$tgaBgColor:rgba($color: $tgaHintColor, $alpha:$generalOpacity);
+$otherBgColor:rgba($color: $otherHintColor, $alpha:$generalOpacity);
 $bottomDistance:0.5%;
 //字体点击之后样式
 .fontSelected {
@@ -48,7 +51,17 @@ $bottomDistance:0.5%;
 .fontBottomBtnNormal{
     color: $bottomBtnColor;
 }
-
+:export{
+    pngHintColor:$pngHintColor;
+    jpgHintColor:$jpgHintColor;
+    tgaHintColor:$tgaHintColor;
+    otherHintColor:$otherHintColor;
+    generalOpacity:$generalOpacity;
+    pngBgColor:$pngBgColor;
+    jpgBgColor:$jpgBgColor;
+    tgaBgColor:$tgaBgColor;
+    otherBgColor:$otherBgColor; 
+}
 
 
 

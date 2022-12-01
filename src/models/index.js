@@ -24,7 +24,7 @@ const FileManager = {
         query.include('owner');
         query.limit(limit);
         query.skip(page * limit);
-
+        
     },
     //将Url图片转换成Base64格式,思路是通过canvas元素访问url转成Base64格式
     convertUrlToBase64(url) {
@@ -53,17 +53,17 @@ const FileManager = {
     },
     //将Base64格式转换成Blob格式
     convertBase64UrlToBlob(base64) {
-        var parts = base64.dataURL.split(";base64,");
-        var contentType = parts[0].split(":")[1];
-        var raw = window.atob(parts[1]);
-        var rawLength = raw.length;
-        var uInt8Array = new Uint8Array(rawLength);
-        for (var i = 0; i < rawLength; i++) {
+        let parts = base64.dataURL.split(";base64,");
+        let contentType = parts[0].split(":")[1];
+        let raw = window.atob(parts[1]);
+        let rawLength = raw.length;
+        let uInt8Array = new Uint8Array(rawLength);
+        for (let i = 0; i < rawLength; i++) {
             uInt8Array[i] = raw.charCodeAt(i);
         }
         return new Blob([uInt8Array], { type: contentType });
     },
-
+    //判断游览器类型
     myBrowser() {
         var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
         if (userAgent.indexOf("OPR") > -1) {

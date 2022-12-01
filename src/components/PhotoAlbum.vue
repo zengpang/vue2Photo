@@ -5,7 +5,7 @@
           id="pageShowImgInput" @input="getPageShowNumber" /></div>
     </header>
     <main :style="imgTableStr">
-      <ImageItem v-for="item in pageShowNumber" :key="item"></ImageItem>
+      <ImageItem v-for="item in pageNowNumber" :key="item"></ImageItem>
     </main>
 
   </div>
@@ -14,12 +14,13 @@
 <script>
 import ImageItem from './ImageItem'
 import agency from './agency.js'
- 
+
 export default {
   name: "PhotoAlbum",
   data() {
     return {
-      pageShowNumber: 20,//单页显示图片
+      pageShowNumber: 20,//单页显示图片数量
+      pageNowNumber:20,//当前单页显示图片数量
       imageSum: 41, //图片总数量
       imgTableCol: 5,//列
       imgTableRow: 4,//行
@@ -30,15 +31,29 @@ export default {
     ImageItem,
   },
   methods: {
+    //获取当前单页显示图片数量
+    getpageNowNumer(){
+      let selectNumber=0;
+      agency.$emit("getSelectNumber",val=>{
+        selectNumber=val;
+      });
+      console.log(selectNumber);
+      // let selectNumber= this.$refs["BottomSidebar"].selectPageNumber;
+      let nowNumber=this.imageSum- (selectNumber-1)*this.pageShowNumber;
+      nowNumber=nowNumber>=this.pageShowNumber?this.pageShowNumber:nowNumber;
+      this.pageNowNumber=nowNumber;
+    },
+    //获取单页显示图片数量
     getPageShowNumber(event) {
-      this.pageShowNumber = parseInt(document.getElementById("pageShowImgInput").value);
-
+      this.pageShowNumber=parseInt(document.getElementById("pageShowImgInput").value);
+     // this.pageNowNumber = parseInt(document.getElementById("pageShowImgInput").value);
+      this.getpageNowNumer();
       switch (true) {
-        case (this.pageShowNumber <= ((this.imgTableCol - 1) * this.imgTableRow)): {
-          this.imgTableRow = Math.floor(Math.sqrt(this.pageShowNumber));
+        case (this.pageNowNumber <= ((this.imgTableCol - 1) * this.imgTableRow)): {
+          this.imgTableRow = Math.floor(Math.sqrt(this.pageNowNumber));
         }; break;
-        case (this.pageShowNumber >= ((this.imgTableCol + 1) * this.imgTableRow)): {
-          this.imgTableRow = Math.floor(Math.sqrt(this.pageShowNumber));
+        case (this.pageNowNumber >= ((this.imgTableCol + 1) * this.imgTableRow)): {
+          this.imgTableRow = Math.floor(Math.sqrt(this.pageNowNumber));
         }; break;
       }
 
@@ -50,11 +65,10 @@ export default {
 
     },
     //获取图片
-    async getimg()
-    {
-      this.$refs["LoadingDialog"].isL;
-      await new Promise(()=>{
-         
+    async getimg() {
+     
+      await new Promise(() => {
+
       })
     }
   },
@@ -79,11 +93,15 @@ export default {
     },
     imageSum(newSum) {
 
-      agency.$emit("pageNumberUpdate", { imgTotals: newSum, imgShows: this.pageShowNumber });
+      agency.$emit("pageNumberUpdate", { imgTotals: newSum, imgShows: this.pageNowNumber });
     }
   },
+  created() {
+    agency.$on("pageNumberChange", ()=>{this.getpageNowNumer()});
+  },
   mounted() {
-    agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageShowNumber });
+    agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageNowNumber });
+
   }
 }
 </script>
