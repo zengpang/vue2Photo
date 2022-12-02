@@ -1,12 +1,13 @@
 <template>
     <div class="imageItem" @click="imgitemBtn">
-        <h3>图片</h3>
+        <img  :src="imgUrl"/>
     </div>
 </template>
 
 <script>
 export default {
     name: "ImageItem",
+    props:['imgUrl'],
     methods:{
         imgitemBtn()
         {
@@ -22,9 +23,11 @@ export default {
     background-color: burlywood;
     display: flex;
     cursor: pointer;
-    h3{
+    img{
         display: inline;
         margin: auto;
+        height: 100%;
+        width: 100%;
     }
 }
 </style>

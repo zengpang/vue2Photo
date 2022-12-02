@@ -6,14 +6,16 @@
     </div>
 </template>
 <script>
+import agency from '../components/agency';
 import lottie from 'lottie-web';
 import loadingJson from '../assets/animJson/blueloadingGif.json'
 export default {
+    // props: ['isLoading'],
     name: "LoadingDialog",
-    data() {
-        return {
-            isLoading: false
-        };
+    data(){
+      return{
+        isLoading:false
+      };
     },
     mounted() {
 
@@ -26,6 +28,10 @@ export default {
             animationData: loadingJson,
         });
         document.getElementsByTagName("svg")[0].setAttribute("viewBox", "140 60 500 500");
+        //注册事件
+        agency.$on("loadStatusChange", (isLoading) => {
+            this.isLoading = isLoading;
+        });
     }
 }
 
@@ -62,11 +68,11 @@ export default {
         font-weight: bold;
         transform: translate(-50%, -50%);
         text-align: center;
-        
+
     }
 }
+
 .hideDialog {
     display: none;
 }
-
 </style>

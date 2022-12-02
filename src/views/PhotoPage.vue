@@ -44,10 +44,15 @@ export default {
       this.isSelectAll=!this.isSelectAll;
       console.log(this.isSelectAll);
     },
+   
     TestDown()
     {
       FileManager.download('http://lc-UQqK42CL.cn-n1.lcfile.com/bb6EBrhWrqXO5HfLdm6j6UmhrHcNGV34/Login_BackGround.jpg','Login_BackGround.jpg');
     }
+
+  },
+  created(){
+     
   }
 }
 </script>

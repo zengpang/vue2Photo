@@ -1,10 +1,14 @@
 import AV, { Query, User } from 'leancloud-storage';//引入库文件
 /*sdk初始化*/
 AV.init({
-    appId: "UQqK42CLqBPXHuOK9lYVVTT9-gzGzoHsz",
-    appKey: "hh75vJLiRR1qvBqvKYIZbJlw",
-    serverURL: "https://uqqk42cl.lc-cn-n1-shared.com"
+    appId: "tmQb7jlJhSjhfdUqbXq77PUD-gzGzoHsz",
+    appKey: "s92ueTtV79VLX7Lk3GQQ6FvE",
+    serverURL: "https://tmqb7jlj.lc-cn-n1-shared.com"
+    // appId: "UQqK42CLqBPXHuOK9lYVVTT9-gzGzoHsz",
+    // appKey: "hh75vJLiRR1qvBqvKYIZbJlw",
+    // serverURL: "https://uqqk42cl.lc-cn-n1-shared.com"
 });
+console.log("sdk初始化");
 /*文件管理*/
 const FileManager = {
     /*文件上传*/
@@ -21,10 +25,16 @@ const FileManager = {
     /*文件查询*/
     find({ page, limit = 10 }) {
         const query = new AV.Query('Image');
-        query.include('owner');
+       // query.include('owner');
         query.limit(limit);
         query.skip(page * limit);
-        
+        query.descending('createAt');
+        //query.equalTo('owner',AV.User.current());
+        return new Promise((resolve,reject)=>{
+          query.find()
+          .then(results=>resolve(results))
+          .catch(error=>reject(error))
+        });
     },
     //将Url图片转换成Base64格式,思路是通过canvas元素访问url转成Base64格式
     convertUrlToBase64(url) {

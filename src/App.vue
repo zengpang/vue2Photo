@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <LoadingDialog ref="LoadingDialog"></LoadingDialog>
+    <LoadingDialog ref="LoadingDialog" ></LoadingDialog>
     <HeaderTab></HeaderTab>
-    <router-view/>
-    
+    <router-view />
+    <!-- <HisotyChartVue></HisotyChartVue> -->
   </div>
 </template>
 
@@ -11,13 +11,22 @@
 import LoadingDialog from './dialog/loadingDialog.vue'
 import HeaderTab from './components/HeaderTab'
 import PhotoPage from './views/PhotoPage'
-
+import agency from './components/agency'
+import HisotyChartVue from './components/HisotyChart.vue'
 export default {
   name: 'App',
   components: {
     HeaderTab,
     PhotoPage,
     LoadingDialog
+  },
+  created() {
+    
+    //判断链接是否为首页，如果不是则重置为首页
+    if (this.$route.path !== "/home") {
+      this.$router.replace("/home")
+      console.log(this.$route);
+    }
   }
 }
 </script>
@@ -35,7 +44,6 @@ export default {
   position: absolute;
   border-radius: 1%;
   box-shadow: $boxShadow;
-  
-}
 
+}
 </style>

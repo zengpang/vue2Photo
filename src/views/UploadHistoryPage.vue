@@ -44,6 +44,9 @@ export default {
         HistorySearch,
         HistoryItem,
         HisotyChart
+    },
+    methods:{
+        
     }
 }
 </script>
@@ -57,12 +60,9 @@ $appSidebarWidth: 38%;
     left: $leftDistance;
     right: $leftDistance;
     flex-direction: row;
-
     top: 2%;
     width: 94%;
     height: 92%;
-
-
     .sidebar {
         height: 97.5%;
         width: $appSidebarWidth;
@@ -128,7 +128,6 @@ $appSidebarWidth: 38%;
             border-radius: 6px;
             box-shadow: $boxShadow;
         }
-
         main {
             display: flex;
             position: relative;
@@ -138,7 +137,6 @@ $appSidebarWidth: 38%;
             padding-right: $leftDistance;
             flex-direction: column;
             height: 84%;
-
             background-color: $appBgGrayColor;
             border-radius: 6px;
             box-shadow: $boxShadow;

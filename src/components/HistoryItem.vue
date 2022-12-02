@@ -15,7 +15,6 @@ export default {
   props: ['imgName','imgType'],
   name: "HistoryItem",
   methods:{
-   
     imgClassify(type)
     {
       let itemstyle=  this.$refs["itemdiv"].style;
@@ -29,20 +28,16 @@ export default {
           console.log("png");
         };break;
         case("jpg"):{
-       
           itemstyle.backgroundColor=style.jpgBgColor;
           itemlabelstyle.color=style.jpgHintColor;
           console.log("jpg");
         };break;
         case("tga"):{
-      
-           
           itemstyle.backgroundColor=style.tgaBgColor;
           itemlabelstyle.color=style.tgaHintColor;
           console.log("tga");
         };break;
         default:{
-   
           itemstyle.backgroundColor=style.otherBgColor;
           itemlabelstyle.color=style.otherHintColor;
           console.log("other");
@@ -110,36 +105,7 @@ $typebgColor:var();
 
 
   //根据图片类型的不同，item颜色也不同
-  .type {
-    background-color: rgba($color: $jpgHintColor, $alpha:$generalOpacity);
-    label{
-      color: $jpgHintColor;
-    }
-  }
-  .jpg {
-    background-color: rgba($color: $jpgHintColor, $alpha:$generalOpacity);
-    label{
-      color: $jpgHintColor;
-    }
-  }
-  .png {
-    background-color: rgba($color: $pngHintColor, $alpha:$generalOpacity);
-    label{
-      color: $pngHintColor;
-    }
-  }
-  .tga{
-    background-color: rgba($color: $tgaHintColor, $alpha:$generalOpacity);
-    label{
-      color: $tgaHintColor;
-    }
-  }
-  .other{
-    background-color: rgba($color:$otherHintColor, $alpha:$generalOpacity);
-    label{
-      color: $otherHintColor;
-    }
-  }
+  
   a {
     font-family: "iconfont";
     position: absolute;
