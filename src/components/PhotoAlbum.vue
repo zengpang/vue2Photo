@@ -1,13 +1,15 @@
 <template>
   <div class="photoAlbum">
     <header><label>总共有<a>{{ imageSum }}张</a>全部图片</label>
-      <div class="imgSlider">单页显示最大数量<a>{{ pageShowNumber }}</a><input type="range" value="20" min="4" max="25"
-          id="pageShowImgInput" @input="getPageShowNumber" /></div>
+      <div class="imgSlider">单页最大显示数量<a>{{ pageShowNumber }}</a><input type="range" value="4" min="4" max="25"
+          id="pageShowImgInput" @input="getPageShowNumber" step="1" /></div>
     </header>
     <main :style="imgTableStr">
-      <ImageItem v-for="item in pageNowNumber" :imgUrl="imgList[(item - 1)].attributes.url.attributes.url" :key="item">
+      <!-- :imgUrl="imgList[(item - 1)].attributes.url.attributes.url" -->
+      <ImageItem v-for="item in pageNowNumber" :imgInfo="ImgInfoValue(item)" :key="item" :data="selectPage">
       </ImageItem>
     </main>
+    <!-- <button @click="Testclick">测试</button> -->
 
   </div>
 </template>
@@ -16,18 +18,20 @@
 import ImageItem from './ImageItem'
 import agency from './agency.js'
 import { FileManager } from '../models'
-
+import globalVariable from '../global/globalVariable';
+import { DataDispose } from '../models';
 export default {
   name: "PhotoAlbum",
   data() {
     return {
-      pageShowNumber: 20,//单页显示图片数量
-      pageNowNumber: 20,//当前单页可显示图片数量的最大值
-      selectPage: 1,
+      pageShowNumber: 4,//当前单页可显示图片数量的最大值
+      pageNowNumber: 20,//单页显示图片数量
+
+      selectPage: globalVariable.selectPage,
       imageSum: 1, //图片总数量
-      imgTableCol: 5,//列
-      imgTableRow: 4,//行
-      imgTableStr: 'grid-template-columns:auto auto auto auto auto;grid-template-rows: auto auto auto auto;',
+      imgTableCol: 3,//列
+      imgTableRow: 2,//行
+      imgTableStr: 'grid-template-columns:1fr 1fr 1fr;grid-template-rows: 1fr 1fr;',
       imgList: [],
     }
   },
@@ -35,39 +39,75 @@ export default {
     ImageItem,
   },
   methods: {
-    //获取当前所选页面
-    getSelectNumber() {
-      agency.$emit("getSelectNumber", val => {
-        this.selectPage = val;
-      });
+    Testclick() {
+      this.pageShowNumber = 9;
+      this.pageShowNumberUpdate();
     },
+    ImgInfoValue(itemNumber) {
+
+      itemNumber = itemNumber - 1 + (globalVariable.selectPage - 1) * this.pageShowNumber;
+      itemNumber = itemNumber >= (this.imgList.length - 1) ? this.imgList.length - 1 : itemNumber;
+    
+      let itemInfo = this.imgList[itemNumber];
+      let imgInfo={imgName:"",imgType:"",imgSize:0,imgUrl:""};
+     
+      try {
+        
+         imgInfo=DataDispose.imgDatainit(itemInfo);
+      } catch (error) {
+
+      }
+      return imgInfo;
+    },
+   
     //获取当前单页显示图片数量
     getpageNowNumer() {
-      this.getSelectNumber();
-      let selectNumber = this.selectPage;
-
+      //this.getSelectNumber();
+      let selectNumber = globalVariable.selectPage;
+      this.selectPage=globalVariable.selectPage;
+      console.log(this.selectPage);
       // let selectNumber= this.$refs["BottomSidebar"].selectPageNumber;
       let nowNumber = this.imageSum - (selectNumber - 1) * this.pageShowNumber;
       nowNumber = nowNumber >= this.pageShowNumber ? this.pageShowNumber : nowNumber;
+      
+      if (nowNumber < 0) {
+        console.log(globalVariable.selectPage);
+        nowNumber = this.imageSum % this.pageShowNumber;;
+      }
+      console.log("切换页面中"+nowNumber);
       this.pageNowNumber = nowNumber;
     },
     pageShowNumberUpdate() {
       this.getpageNowNumer();
       switch (true) {
-        case (this.pageNowNumber <= ((this.imgTableCol - 1) * this.imgTableRow)): {
-          this.imgTableRow = Math.floor(Math.sqrt(this.pageNowNumber));
+        case (this.pageShowNumber <= ((this.imgTableCol - 1) * this.imgTableRow)): {
+         
+          this.imgTableRow = Math.ceil(Math.sqrt(this.pageShowNumber));
+       
+          console.log(this.imgTableRow+"行");
         }; break;
-        case (this.pageNowNumber >= ((this.imgTableCol + 1) * this.imgTableRow)): {
-          this.imgTableRow = Math.floor(Math.sqrt(this.pageNowNumber));
+        case (this.pageShowNumber >= ((this.imgTableCol ) * this.imgTableRow)): {
+          this.imgTableRow = Math.ceil(Math.sqrt(this.pageShowNumber));
+          // if(this.pageShowNumber==5)
+          // {
+          //   this.imgTableRow =2;
+          // }
+          console.log(this.imgTableRow+"行");
         }; break;
       }
+      console.log(this.imgTableRow+"行");
     },
     //获取单页显示图片数量
     getPageShowNumber(event) {
+
+
       this.pageShowNumber = parseInt(document.getElementById("pageShowImgInput").value);
-      // this.pageNowNumber = parseInt(document.getElementById("pageShowImgInput").value);
+      agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageNowNumber });
+      // console.log(this.pageShowNumber);
       this.pageShowNumberUpdate();
-    
+
+
+
     },
     append(newList) {
       this.imgList = this.imgList.concat(newList);
@@ -77,10 +117,10 @@ export default {
       console.log("正在获取图片");
       let isLoading = true;
       agency.$emit("loadStatusChange", isLoading);
-      FileManager.find({ page: this.selectNumber, limit: this.pageNowNumber })
+      FileManager.findAll()
         .then(newList => {
-          this.append(newList);
-          this.selectPage++;
+          this.imgList = newList;
+          globalVariable.imgList=newList;
         }).catch(error => {
           console.log("获取图片失败");
         }).finally(() => {
@@ -91,8 +131,31 @@ export default {
           //this.getPageShowNumber();
           //this.pageShowNumber=this.imageSum;
           this.pageShowNumberUpdate();
+          agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageShowNumber });
           console.log(this.imgList);
         })
+      // FileManager.find({ page: this.selectNumber, limit: this.pageShowNumber })
+      //   .then(newList => {
+      //     // 1,2,3,4,5,6
+      //     // if(this.pageoldNumber==this.pageNowNumber)
+      //     // {
+
+      //     // }
+      //     this.append(newList);
+      //     this.selectNumber++;
+      //   }).catch(error => {
+      //     console.log("获取图片失败");
+      //   }).finally(() => {
+      //     console.log("正在图片获取完成");
+      //     isLoading = false;
+      //     agency.$emit("loadStatusChange", isLoading);
+      //     this.imageSum = this.imgList.length;
+      //     //this.getPageShowNumber();
+      //     //this.pageShowNumber=this.imageSum;
+      //     this.pageShowNumberUpdate();
+      //     agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageShowNumber });
+      //     console.log(this.imgList);
+      //   })
 
     },
     //获取图片
@@ -107,13 +170,13 @@ export default {
     imgTableRow(newRow) {
       console.log(newRow);
       this.imgTableCol = newRow + 1;
-      let imgTableColStr = 'grid-template-columns:';
-      let imgTableRowStr = 'grid-template-rows:';
+      let imgTableColStr = `grid-template-columns:`;
+      let imgTableRowStr = `grid-template-rows:`;
       for (let index = 0; index < this.imgTableCol; index++) {
-        imgTableColStr += "auto ";
+        imgTableColStr += "1fr ";
       }
       for (let index = 0; index < newRow; index++) {
-        imgTableRowStr += "auto ";
+        imgTableRowStr += "1fr ";
       }
 
       this.imgTableStr = imgTableColStr + ";" + imgTableRowStr;
@@ -128,13 +191,15 @@ export default {
     }
   },
   created() {
-    agency.$on("pageNumberChange", () => { this.getpageNowNumer(); this.loadimg(); });
+    agency.$on("pageNumberChange", () => { this.getpageNowNumer(); });
   },
   mounted() {
+
     this.loadimg();
 
     //this.getpageNowNumer();
     agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageNowNumber });
+
 
   }
 }
@@ -204,10 +269,9 @@ export default {
     width: 100%;
     transition: all $animTime;
     display: grid;
-    // grid-template-columns: auto auto auto auto auto;
-    // grid-template-rows: auto auto auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
+ 
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
   }
 }
 </style>

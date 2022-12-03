@@ -55,7 +55,7 @@ class Pie extends THREE.Group {
   
       return new THREE.ExtrudeGeometry(shape, { amount: height, bevelEnabled: false, steps: 1 })
     }
-    //添加字体
+    //添加文字（暂无）
     addText (text, x, y, z) {
   
     }

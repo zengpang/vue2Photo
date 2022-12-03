@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>iconfont Demo</title>
+  <link rel="shortcut icon" href="//img.alicdn.com/imgextra/i4/O1CN01Z5paLz1O0zuCC7osS_!!6000000001644-55-tps-83-82.svg" type="image/x-icon"/>
+  <link rel="icon" type="image/svg+xml" href="//img.alicdn.com/imgextra/i4/O1CN01Z5paLz1O0zuCC7osS_!!6000000001644-55-tps-83-82.svg"/>
+  <link rel="stylesheet" href="https://g.alicdn.com/thx/cube/1.3.2/cube.min.css">
+  <link rel="stylesheet" href="demo.css">
+  <link rel="stylesheet" href="iconfont.css">
+  <script src="iconfont.js"></script>
+  <!-- jQuery -->
+  <script src="https://a1.alicdn.com/oss/uploads/2018/12/26/7bfddb60-08e8-11e9-9b04-53e73bb6408b.js"></script>
+  <!-- 代码高亮 -->
+  <script src="https://a1.alicdn.com/oss/uploads/2018/12/26/a3f714d0-08e6-11e9-8a15-ebf944d7534c.js"></script>
+  <style>
+    .main .logo {
+      margin-top: 0;
+      height: auto;
+    }
+
+    .main .logo a {
+      display: flex;
+      align-items: center;
+    }
+
+    .main .logo .sub-title {
+      margin-left: 0.5em;
+      font-size: 22px;
+      color: #fff;
+      background: linear-gradient(-45deg, #3967FF, #B500FE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <h1 class="logo"><a href="https://www.iconfont.cn/" title="iconfont 首页" target="_blank">
+      <img width="200" src="https://img.alicdn.com/imgextra/i3/O1CN01Mn65HV1FfSEzR6DKv_!!6000000000514-55-tps-228-59.svg">
+      
+    </a></h1>
+    <div class="nav-tabs">
+      <ul id="tabs" class="dib-box">
+        <li class="dib active"><span>Unicode</span></li>
+        <li class="dib"><span>Font class</span></li>
+        <li class="dib"><span>Symbol</span></li>
+      </ul>
+      
+      <a href="https://www.iconfont.cn/manage/index?manage_type=myprojects&projectId=3786935" target="_blank" class="nav-more">查看项目</a>
+      
+    </div>
+    <div class="tab-container">
+      <div class="content unicode" style="display: block;">
+          <ul class="icon_lists dib-box">
+          
+            <li class="dib">
+              <span class="icon iconfont">&#xe8dc;</span>
+                <div class="name">关闭实心</div>
+                <div class="code-name">&amp;#xe8dc;</div>
+              </li>
+          
+            <li class="dib">
+              <span class="icon iconfont">&#xe69a;</span>
+                <div class="name">other</div>
+                <div class="code-name">&amp;#xe69a;</div>
+              </li>
+          
+            <li class="dib">
+              <span class="icon iconfont">&#xe69f;</span>
+                <div class="name">PNG</div>
+                <div class="code-name">&amp;#xe69f;</div>
+              </li>
+          
+            <li class="dib">
+              <span class="icon iconfont">&#xe6a5;</span>
+                <div class="name">JPG</div>
+                <div class="code-name">&amp;#xe6a5;</div>
+              </li>
+          
+            <li class="dib">
+              <span class="icon iconfont">&#xe660;</span>
+                <div class="name">tga</div>
+                <div class="code-name">&amp;#xe660;</div>
+              </li>
+          
+            <li class="dib">
+              <span class="icon iconfont">&#xe634;</span>
+                <div class="name">其他格式文件</div>
+                <div class="code-name">&amp;#xe634;</div>
+              </li>
+          
+            <li class="dib">
+              <span class="icon iconfont">&#xe613;</span>
+                <div class="name">搜索框</div>
+                <div class="code-name">&amp;#xe613;</div>
+              </li>
+          
+            <li class="dib">
+              <span class="icon iconfont">&#xe600;</span>
+                <div class="name">链接</div>
+                <div class="code-name">&amp;#xe600;</div>
+              </li>
+          
+            <li class="dib">
+              <span class="icon iconfont">&#xe62d;</span>
+                <div class="name">箭头 右</div>
+                <div class="code-name">&amp;#xe62d;</div>
+              </li>
+          
+          </ul>
+          <div class="article markdown">
+          <h2 id="unicode-">Unicode 引用</h2>
+          <hr>
+
+          <p>Unicode 是字体在网页端最原始的应用方式，特点是：</p>
+          <ul>
+            <li>支持按字体的方式去动态调整图标大小，颜色等等。</li>
+            <li>默认情况下不支持多色，直接添加多色图标会自动去色。</li>
+          </ul>
+          <blockquote>
+            <p>注意：新版 iconfont 支持两种方式引用多色图标：SVG symbol 引用方式和彩色字体图标模式。（使用彩色字体图标需要在「编辑项目」中开启「彩色」选项后并重新生成。）</p>
+          </blockquote>
+          <p>Unicode 使用步骤如下：</p>
+          <h3 id="-font-face">第一步：拷贝项目下面生成的 <code>@font-face</code></h3>
+<pre><code class="language-css"
+>@font-face {
+  font-family: 'iconfont';
+  src: 
+       url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2'),
+       url('iconfont.woff?t=1670066282692') format('woff'),
+       url('iconfont.ttf?t=1670066282692') format('truetype');
+}
+</code></pre>
+          <h3 id="-iconfont-">第二步：定义使用 iconfont 的样式</h3>
+<pre><code class="language-css"
+>.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</code></pre>
+          <h3 id="-">第三步：挑选相应图标并获取字体编码，应用于页面</h3>
+<pre>
+<code class="language-html"
+>&lt;span class="iconfont"&gt;&amp;#x33;&lt;/span&gt;
+</code></pre>
+          <blockquote>
+            <p>"iconfont" 是你项目下的 font-family。可以通过编辑项目查看，默认是 "iconfont"。</p>
+          </blockquote>
+          </div>
+      </div>
+      <div class="content font-class">
+        <ul class="icon_lists dib-box">
+          
+          <li class="dib">
+            <span class="icon iconfont icon-close"></span>
+            <div class="name">
+              关闭实心
+            </div>
+            <div class="code-name">.icon-close
+            </div>
+          </li>
+          
+          <li class="dib">
+            <span class="icon iconfont icon-other"></span>
+            <div class="name">
+              other
+            </div>
+            <div class="code-name">.icon-other
+            </div>
+          </li>
+          
+          <li class="dib">
+            <span class="icon iconfont icon-PNG1"></span>
+            <div class="name">
+              PNG
+            </div>
+            <div class="code-name">.icon-PNG1
+            </div>
+          </li>
+          
+          <li class="dib">
+            <span class="icon iconfont icon-JPG"></span>
+            <div class="name">
+              JPG
+            </div>
+            <div class="code-name">.icon-JPG
+            </div>
+          </li>
+          
+          <li class="dib">
+            <span class="icon iconfont icon-tga"></span>
+            <div class="name">
+              tga
+            </div>
+            <div class="code-name">.icon-tga
+            </div>
+          </li>
+          
+          <li class="dib">
+            <span class="icon iconfont icon-icon_xinyong_xianxing_jijin-"></span>
+            <div class="name">
+              其他格式文件
+            </div>
+            <div class="code-name">.icon-icon_xinyong_xianxing_jijin-
+            </div>
+          </li>
+          
+          <li class="dib">
+            <span class="icon iconfont icon-searchicon"></span>
+            <div class="name">
+              搜索框
+            </div>
+            <div class="code-name">.icon-searchicon
+            </div>
+          </li>
+          
+          <li class="dib">
+            <span class="icon iconfont icon-link"></span>
+            <div class="name">
+              链接
+            </div>
+            <div class="code-name">.icon-link
+            </div>
+          </li>
+          
+          <li class="dib">
+            <span class="icon iconfont icon-arrows"></span>
+            <div class="name">
+              箭头 右
+            </div>
+            <div class="code-name">.icon-arrows
+            </div>
+          </li>
+          
+        </ul>
+        <div class="article markdown">
+        <h2 id="font-class-">font-class 引用</h2>
+        <hr>
+
+        <p>font-class 是 Unicode 使用方式的一种变种，主要是解决 Unicode 书写不直观，语意不明确的问题。</p>
+        <p>与 Unicode 使用方式相比，具有如下特点：</p>
+        <ul>
+          <li>相比于 Unicode 语意明确，书写更直观。可以很容易分辨这个 icon 是什么。</li>
+          <li>因为使用 class 来定义图标，所以当要替换图标时，只需要修改 class 里面的 Unicode 引用。</li>
+        </ul>
+        <p>使用步骤如下：</p>
+        <h3 id="-fontclass-">第一步：引入项目下面生成的 fontclass 代码：</h3>
+<pre><code class="language-html">&lt;link rel="stylesheet" href="./iconfont.css"&gt;
+</code></pre>
+        <h3 id="-">第二步：挑选相应图标并获取类名，应用于页面：</h3>
+<pre><code class="language-html">&lt;span class="iconfont icon-xxx"&gt;&lt;/span&gt;
+</code></pre>
+        <blockquote>
+          <p>"
+            iconfont" 是你项目下的 font-family。可以通过编辑项目查看，默认是 "iconfont"。</p>
+        </blockquote>
+      </div>
+      </div>
+      <div class="content symbol">
+          <ul class="icon_lists dib-box">
+          
+            <li class="dib">
+                <svg class="icon svg-icon" aria-hidden="true">
+                  <use xlink:href="#icon-close"></use>
+                </svg>
+                <div class="name">关闭实心</div>
+                <div class="code-name">#icon-close</div>
+            </li>
+          
+            <li class="dib">
+                <svg class="icon svg-icon" aria-hidden="true">
+                  <use xlink:href="#icon-other"></use>
+                </svg>
+                <div class="name">other</div>
+                <div class="code-name">#icon-other</div>
+            </li>
+          
+            <li class="dib">
+                <svg class="icon svg-icon" aria-hidden="true">
+                  <use xlink:href="#icon-PNG1"></use>
+                </svg>
+                <div class="name">PNG</div>
+                <div class="code-name">#icon-PNG1</div>
+            </li>
+          
+            <li class="dib">
+                <svg class="icon svg-icon" aria-hidden="true">
+                  <use xlink:href="#icon-JPG"></use>
+                </svg>
+                <div class="name">JPG</div>
+                <div class="code-name">#icon-JPG</div>
+            </li>
+          
+            <li class="dib">
+                <svg class="icon svg-icon" aria-hidden="true">
+                  <use xlink:href="#icon-tga"></use>
+                </svg>
+                <div class="name">tga</div>
+                <div class="code-name">#icon-tga</div>
+            </li>
+          
+            <li class="dib">
+                <svg class="icon svg-icon" aria-hidden="true">
+                  <use xlink:href="#icon-icon_xinyong_xianxing_jijin-"></use>
+                </svg>
+                <div class="name">其他格式文件</div>
+                <div class="code-name">#icon-icon_xinyong_xianxing_jijin-</div>
+            </li>
+          
+            <li class="dib">
+                <svg class="icon svg-icon" aria-hidden="true">
+                  <use xlink:href="#icon-searchicon"></use>
+                </svg>
+                <div class="name">搜索框</div>
+                <div class="code-name">#icon-searchicon</div>
+            </li>
+          
+            <li class="dib">
+                <svg class="icon svg-icon" aria-hidden="true">
+                  <use xlink:href="#icon-link"></use>
+                </svg>
+                <div class="name">链接</div>
+                <div class="code-name">#icon-link</div>
+            </li>
+          
+            <li class="dib">
+                <svg class="icon svg-icon" aria-hidden="true">
+                  <use xlink:href="#icon-arrows"></use>
+                </svg>
+                <div class="name">箭头 右</div>
+                <div class="code-name">#icon-arrows</div>
+            </li>
+          
+          </ul>
+          <div class="article markdown">
+          <h2 id="symbol-">Symbol 引用</h2>
+          <hr>
+
+          <p>这是一种全新的使用方式，应该说这才是未来的主流，也是平台目前推荐的用法。相关介绍可以参考这篇<a href="">文章</a>
+            这种用法其实是做了一个 SVG 的集合，与另外两种相比具有如下特点：</p>
+          <ul>
+            <li>支持多色图标了，不再受单色限制。</li>
+            <li>通过一些技巧，支持像字体那样，通过 <code>font-size</code>, <code>color</code> 来调整样式。</li>
+            <li>兼容性较差，支持 IE9+，及现代浏览器。</li>
+            <li>浏览器渲染 SVG 的性能一般，还不如 png。</li>
+          </ul>
+          <p>使用步骤如下：</p>
+          <h3 id="-symbol-">第一步：引入项目下面生成的 symbol 代码：</h3>
+<pre><code class="language-html">&lt;script src="./iconfont.js"&gt;&lt;/script&gt;
+</code></pre>
+          <h3 id="-css-">第二步：加入通用 CSS 代码（引入一次就行）：</h3>
+<pre><code class="language-html">&lt;style&gt;
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+&lt;/style&gt;
+</code></pre>
+          <h3 id="-">第三步：挑选相应图标并获取类名，应用于页面：</h3>
+<pre><code class="language-html">&lt;svg class="icon" aria-hidden="true"&gt;
+  &lt;use xlink:href="#icon-xxx"&gt;&lt;/use&gt;
+&lt;/svg&gt;
+</code></pre>
+          </div>
+      </div>
+
+    </div>
+  </div>
+  <script>
+  $(document).ready(function () {
+      $('.tab-container .content:first').show()
+
+      $('#tabs li').click(function (e) {
+        var tabContent = $('.tab-container .content')
+        var index = $(this).index()
+
+        if ($(this).hasClass('active')) {
+          return
+        } else {
+          $('#tabs li').removeClass('active')
+          $(this).addClass('active')
+
+          tabContent.hide().eq(index).fadeIn()
+        }
+      })
+    })
+  </script>
+</body>
+</html>

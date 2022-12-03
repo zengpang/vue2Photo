@@ -1,0 +1,93 @@
+{
+  "id": "3786935",
+  "name": "vue2photo",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2939196",
+      "name": "关闭26",
+      "font_class": "closeBtn",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "3730074",
+      "name": "关闭",
+      "font_class": "guanbi",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "2076367",
+      "name": "关闭小",
+      "font_class": "guanbixiao",
+      "unicode": "e8bb",
+      "unicode_decimal": 59579
+    },
+    {
+      "icon_id": "2076434",
+      "name": "关闭实心",
+      "font_class": "close",
+      "unicode": "e8dc",
+      "unicode_decimal": 59612
+    },
+    {
+      "icon_id": "22906384",
+      "name": "other",
+      "font_class": "other",
+      "unicode": "e69a",
+      "unicode_decimal": 59034
+    },
+    {
+      "icon_id": "23182868",
+      "name": "PNG",
+      "font_class": "PNG1",
+      "unicode": "e69f",
+      "unicode_decimal": 59039
+    },
+    {
+      "icon_id": "23183417",
+      "name": "JPG",
+      "font_class": "JPG",
+      "unicode": "e6a5",
+      "unicode_decimal": 59045
+    },
+    {
+      "icon_id": "12600923",
+      "name": "tga",
+      "font_class": "tga",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "9697605",
+      "name": "其他格式文件",
+      "font_class": "icon_xinyong_xianxing_jijin-",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "2357495",
+      "name": "搜索框",
+      "font_class": "searchicon",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "77403",
+      "name": "链接",
+      "font_class": "link",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "2674928",
+      "name": "箭头 右",
+      "font_class": "arrows",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    }
+  ]
+}

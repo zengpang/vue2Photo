@@ -17,6 +17,11 @@ export default {
         isLoading:false
       };
     },
+    created(){
+        agency.$on("loadStatusChange", (isLoading) => {
+            this.isLoading = isLoading;
+        });
+    },
     mounted() {
 
         lottie.loadAnimation({//初始化
@@ -29,9 +34,7 @@ export default {
         });
         document.getElementsByTagName("svg")[0].setAttribute("viewBox", "140 60 500 500");
         //注册事件
-        agency.$on("loadStatusChange", (isLoading) => {
-            this.isLoading = isLoading;
-        });
+        
     }
 }
 

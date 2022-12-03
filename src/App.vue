@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <LoadingDialog ref="LoadingDialog" ></LoadingDialog>
+    <ImageDialog ref="ImageDialog"></ImageDialog>
+    <SearchDialog ref="SearchDialog"></SearchDialog>
     <HeaderTab></HeaderTab>
     <router-view />
     <!-- <HisotyChartVue></HisotyChartVue> -->
@@ -11,14 +13,16 @@
 import LoadingDialog from './dialog/loadingDialog.vue'
 import HeaderTab from './components/HeaderTab'
 import PhotoPage from './views/PhotoPage'
-import agency from './components/agency'
-import HisotyChartVue from './components/HisotyChart.vue'
+import ImageDialog from './dialog/imageDialog.vue'
+import SearchDialog from './dialog/searchDialog.vue'
 export default {
   name: 'App',
   components: {
     HeaderTab,
     PhotoPage,
-    LoadingDialog
+    LoadingDialog,
+    ImageDialog,
+    SearchDialog
   },
   created() {
     

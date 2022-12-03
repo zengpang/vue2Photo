@@ -25,24 +25,37 @@ const FileManager = {
     /*文件查询*/
     find({ page, limit = 10 }) {
         const query = new AV.Query('Image');
-       // query.include('owner');
+        // query.include('owner');
         query.limit(limit);
         query.skip(page * limit);
         query.descending('createAt');
         //query.equalTo('owner',AV.User.current());
-        return new Promise((resolve,reject)=>{
-          query.find()
-          .then(results=>resolve(results))
-          .catch(error=>reject(error))
+        return new Promise((resolve, reject) => {
+            query.find()
+                .then(results => resolve(results))
+                .catch(error => reject(error))
+        });
+    },
+    /*查询所有文件*/
+    findAll() {
+        const query = new AV.Query('Image');
+        // query.include('owner');
+
+        query.descending('createAt');
+        //query.equalTo('owner',AV.User.current());
+        return new Promise((resolve, reject) => {
+            query.find()
+                .then(results => resolve(results))
+                .catch(error => reject(error))
         });
     },
     //将Url图片转换成Base64格式,思路是通过canvas元素访问url转成Base64格式
     convertUrlToBase64(url) {
-        return new Promise( (resolve, reject)=> {
+        return new Promise((resolve, reject) => {
             let img = new Image();
             img.crossOrigin = "Anonymous";
             img.src = url;
-            img.onload = ()=> {
+            img.onload = () => {
                 let canvas = document.createElement("canvas");
                 canvas.width = img.width;
                 canvas.height = img.height;
@@ -120,7 +133,37 @@ const FileManager = {
     }
 
 };
+const DataDispose = {
+    imgDatainits(imgList) {
+        const mb = 1048576;
+        let dataItems = [];
+        imgList.forEach(element => {
+            let fileName = element.attributes.filename;
+            let fileSize = (element.attributes.url.attributes.metaData.size / mb).toFixed(1) + "MB";
+            let fileType = element.attributes.url.attributes.mime_type;
+            let fileUrl = element.attributes.url.attributes.url;
+            let fileInfo = { imgName: fileName, imgType: fileType, imgSize: fileSize, imgUrl: fileUrl };
 
+            dataItems.push(fileInfo);
+        });
+        return dataItems;
+    },
+    imgDatainit(item) {
+        const mb = 1048576;
+
+
+        let fileName = item.attributes.filename;
+        let fileSize = (item.attributes.url.attributes.metaData.size / mb).toFixed(1) + "MB";
+        let fileType = item.attributes.url.attributes.mime_type;
+        let fileUrl = item.attributes.url.attributes.url;
+        let fileInfo = { imgName: fileName, imgType: fileType, imgSize: fileSize, imgUrl: fileUrl };
+
+
+
+        return fileInfo;
+    }
+}
 export {
-    FileManager
+    FileManager,
+    DataDispose
 };

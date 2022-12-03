@@ -2,14 +2,16 @@
   <div class="headerTab">
     <router-link :to="{ name: TabLink.tabLink }"
       v-bind:class="{ titles: true, fontNormal: !isSelected[TabLink.tabname], fontSelected: isSelected[TabLink.tabname] }"
-      v-for="TabLink in TabLinks" @click.native="changePageBtn(TabLink.tabname)" :key="TabLink.tabname">{{ TabLink.tabname }}
+      v-for="TabLink in TabLinks" @click.native="changePageBtn(TabLink.tabname)" :key="TabLink.tabname">{{
+    TabLink.tabname
+      }}
     </router-link>
     <!--  -->
   </div>
 </template>
    
 <script>
-
+import agency from './agency';
 export default {
 
   name: 'HeaderTab',
@@ -20,22 +22,20 @@ export default {
     }
   },
   methods: {
+
     changePageBtn(selectStr) //点击事件
     {
-      console.log(selectStr);
       for (let i = 0; i < this.TabLinks.length; i++) {
         this.isSelected[this.TabLinks[i].tabname] = false;
         if (this.TabLinks[i].tabname == selectStr) {
           this.isSelected[this.TabLinks[i].tabname] = true;
         }
       }
-    }
-  },
-  computed: {
-     
-  },
-  created() {
+    },
 
+    created() {
+
+    }
   }
 }
 </script>

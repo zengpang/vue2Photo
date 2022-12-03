@@ -10,7 +10,7 @@
             <main>
                 <h2>已上传文件</h2>
                 <HistoryItem v-for="(uploaditem, uploadindex) in uploadHistorys" :key="uploadindex"
-                    :imgName="uploaditem.imgName" :imgType="uploaditem.imgType"></HistoryItem>
+                    :imgName="uploaditem.imgName" :imgType="uploaditem.imgType" :imgUrl="uploaditem.imgUrl" :imgSize="uploaditem.imgSize"></HistoryItem>
             </main>
 
         </main>
@@ -29,15 +29,19 @@
     </div>
 </template>
 <script>
+import globalVariable from '../global/globalVariable';
 import HistorySearch from '../components/HistorySearch';
 import HistoryItem from '../components/HistoryItem';
 import HisotyChart from '../components/HisotyChart.vue';
+import {DataDispose} from'../models';
+// const mb=1048576;
 export default {
     name: "UploadHistoryPage",
     data() {
         return {
             pageTitle: "上传历史",
-            uploadHistorys: [{ imgName: "图片名字.png",imgType:'png', imgSize: "513KB" }, { imgName: "图片名字2.png",imgType:'png', imgSize: "513KB" }, { imgName: "图片名字3.jpg",imgType:'jpg', imgSize: "513KB" }, { imgName: "图片名字3",imgType:'png', imgSize: "513KB" }, { imgName: "图片名字3",imgType:'tga', imgSize: "513KB" }, { imgName: "图片名字3",imgType:'other', imgSize: "513KB" }]
+            //{ imgName: "图片名字.png",imgType:'png', imgSize: "513KB" }, { imgName: "图片名字2.png",imgType:'png', imgSize: "513KB" }, { imgName: "图片名字3.jpg",imgType:'jpg', imgSize: "513KB" }, { imgName: "图片名字3",imgType:'png', imgSize: "513KB" }, { imgName: "图片名字3",imgType:'tga', imgSize: "513KB" }, { imgName: "图片名字3",imgType:'other', imgSize: "513KB" },{ imgName: "图片名字4",imgType:'other', imgSize: "513KB" },{ imgName: "图片名字4",imgType:'other', imgSize: "513KB" }
+            uploadHistorys: []
         }
     },
     components: {
@@ -46,7 +50,10 @@ export default {
         HisotyChart
     },
     methods:{
-        
+      
+    },
+    mounted(){
+        this.uploadHistorys=DataDispose.imgDatainits(globalVariable.imgList);
     }
 }
 </script>
@@ -100,6 +107,7 @@ $appSidebarWidth: 38%;
             background-color:$appBgGrayColor;
             grid-column-gap: 3px;
             grid-row-gap: 3px;
+           
             .fileKindInfo{
                 background-color: $moduleBgColor;
                 border-radius: 6px;
@@ -114,6 +122,9 @@ $appSidebarWidth: 38%;
 
         h2 {
             height: 20%;
+            position: sticky;
+            background-color: $appBgGrayColor;
+            top: 0;
         }
 
         header {
@@ -140,10 +151,9 @@ $appSidebarWidth: 38%;
             background-color: $appBgGrayColor;
             border-radius: 6px;
             box-shadow: $boxShadow;
+            overflow-y: scroll;
             
-        }
-
-        ;
+        };
     }
 
 

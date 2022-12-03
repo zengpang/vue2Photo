@@ -1,57 +1,67 @@
 <template>
   <div class="historyItem">
-    <img src="" alt="">
+    <img @click="imgBtn" :src="imgUrl" alt="">
     <h3>{{ imgName }}</h3>
 
-    <div class="filekind type" ref="itemdiv"><label>12mb</label></div>
+    <div class="filekind type" ref="itemdiv"><label>{{ imgSize }}</label></div>
 
-    <a>&#xe600; | <h4>图片链接</h4></a>
+    <a>&#xe600; | <h4 @click="linkBtn">图片链接</h4></a>
   </div>
 </template>
 <script>
-import style from'../assets/style/index.scss'
+
+import style from '../assets/style/index.scss'
+import agency from './agency';
 console.log(style);
 export default {
-  props: ['imgName','imgType'],
+  props: ['imgName', 'imgType', 'imgSize', 'imgUrl'],
   name: "HistoryItem",
-  methods:{
-    imgClassify(type)
-    {
-      let itemstyle=  this.$refs["itemdiv"].style;
-      let itemlabelstyle=  this.$refs["itemdiv"].querySelector('.filekind label').style;
+  methods: {
+    imgClassify(type) {
+      let itemstyle = this.$refs["itemdiv"].style;
+      let itemlabelstyle = this.$refs["itemdiv"].querySelector('.filekind label').style;
       console.log(this.$refs["itemdiv"].style);
-      switch(type)
-      {
-        case("png"):{
-          itemstyle.backgroundColor=style.pngBgColor;
-          itemlabelstyle.color=style.pngHintColor;
+      switch (type) {
+        case ("image/png"): {
+          itemstyle.backgroundColor = style.pngBgColor;
+          itemlabelstyle.color = style.pngHintColor;
           console.log("png");
-        };break;
-        case("jpg"):{
-          itemstyle.backgroundColor=style.jpgBgColor;
-          itemlabelstyle.color=style.jpgHintColor;
+        }; break;
+        case ("image/jpeg"): {
+          itemstyle.backgroundColor = style.jpgBgColor;
+          itemlabelstyle.color = style.jpgHintColor;
           console.log("jpg");
-        };break;
-        case("tga"):{
-          itemstyle.backgroundColor=style.tgaBgColor;
-          itemlabelstyle.color=style.tgaHintColor;
+        }; break;
+        case ("image/x-tga"): {
+          itemstyle.backgroundColor = style.tgaBgColor;
+          itemlabelstyle.color = style.tgaHintColor;
           console.log("tga");
-        };break;
-        default:{
-          itemstyle.backgroundColor=style.otherBgColor;
-          itemlabelstyle.color=style.otherHintColor;
+        }; break;
+        default: {
+          itemstyle.backgroundColor = style.otherBgColor;
+          itemlabelstyle.color = style.otherHintColor;
           console.log("other");
         };
       }
+    },
+    linkBtn() {
+      alert(this.imgUrl);
+    },
+    imgBtn() {
+      console.log("图片被点击");
+      let imgInfo={imgName:this.imgName, imgType:this.imgType, imgSize:this.imgSize, imgUrl:this.imgUrl}
+      agency.$emit("showImage", (imgInfo));
+
     }
   },
-  mounted(){
+  mounted() {
     this.imgClassify(this.imgType);
   }
 }
 </script>
 <style scoped lang="scss">
-$typebgColor:var();
+$typebgColor: var();
+
 @font-face {
   font-family: "iconfont";
   /* Project id 3786935 */
@@ -61,15 +71,24 @@ $typebgColor:var();
 }
 
 .historyItem {
-  height: 90%;
+  // height: 8%;
   margin-bottom: 3%;
+
   background-color: $moduleBgColor;
   border-radius: 15px;
   display: flex;
   flex-direction: row;
   align-items: center;
   border: 1px lightgray solid;
-  
+
+  h3 {
+    overflow: hidden;
+    width: 21%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  ;
 
   img {
     height: 2.5vw;
@@ -78,8 +97,11 @@ $typebgColor:var();
     margin-right: $leftDistance;
     background-color: aqua;
     box-shadow: $boxShadow;
+    cursor: pointer;
+  }
 
-  };
+  ;
+
   .filekind {
     border-radius: 30px;
     padding-top: 1%;
@@ -95,17 +117,21 @@ $typebgColor:var();
     justify-items: center;
     align-items: center;
     z-index: 1;
-    label{
-  
+
+    label {
+
       margin: auto;
       z-index: 2;
+
     }
-  } ;
+  }
+
+  ;
 
 
 
-  //根据图片类型的不同，item颜色也不同
-  
+
+
   a {
     font-family: "iconfont";
     position: absolute;
@@ -118,7 +144,7 @@ $typebgColor:var();
 
     h4 {
       color: $colorBolid;
-
+      cursor: pointer;
     }
   }
 
