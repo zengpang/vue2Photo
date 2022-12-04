@@ -2,14 +2,13 @@
     <div :class="{ SearchDialog: true, hideDialog: !isShow }">
         <div class="SearchInfo ">
             <a @click="closeBtn">&#xe64d;</a>
+            <h2>搜索结果</h2>
             <div class="SearchResult">
                 <HistoryItem v-for="(uploaditem, uploadindex) in searchList" :key="uploadindex"
                     :imgName="uploaditem.imgName" :imgType="uploaditem.imgType" :imgUrl="uploaditem.imgUrl"
                     :imgSize="uploaditem.imgSize"></HistoryItem>
             </div>
-
         </div>
-
     </div>
 </template>
 <script>
@@ -51,10 +50,10 @@ export default {
 }
 
 .SearchDialog {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.3);
     display: flex;
     box-shadow: $boxShadow;
     right: 0;
@@ -63,8 +62,8 @@ export default {
 }
 
 .SearchInfo {
-    width: 60%;
-    height: 80%;
+    width: 48%;
+    height: 65%;
 
     background-color: $appBgGrayColor;
     display: flex;

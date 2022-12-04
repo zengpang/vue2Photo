@@ -12,6 +12,7 @@
 
 import style from '../assets/style/index.scss'
 import agency from './agency';
+
 console.log(style);
 export default {
   props: ['imgName', 'imgType', 'imgSize', 'imgUrl'],
@@ -20,7 +21,7 @@ export default {
     imgClassify(type) {
       let itemstyle = this.$refs["itemdiv"].style;
       let itemlabelstyle = this.$refs["itemdiv"].querySelector('.filekind label').style;
-      console.log(this.$refs["itemdiv"].style);
+      
       switch (type) {
         case ("image/png"): {
           itemstyle.backgroundColor = style.pngBgColor;
@@ -51,7 +52,6 @@ export default {
       console.log("图片被点击");
       let imgInfo={imgName:this.imgName, imgType:this.imgType, imgSize:this.imgSize, imgUrl:this.imgUrl}
       agency.$emit("showImage", (imgInfo));
-
     }
   },
   mounted() {

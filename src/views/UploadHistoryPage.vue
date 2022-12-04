@@ -10,20 +10,19 @@
             <main>
                 <h2>已上传文件</h2>
                 <HistoryItem v-for="(uploaditem, uploadindex) in uploadHistorys" :key="uploadindex"
-                    :imgName="uploaditem.imgName" :imgType="uploaditem.imgType" :imgUrl="uploaditem.imgUrl" :imgSize="uploaditem.imgSize"></HistoryItem>
+                    :imgName="uploaditem.imgName" :imgType="uploaditem.imgType" :imgUrl="uploaditem.imgUrl"
+                    :imgSize="uploaditem.imgSize"></HistoryItem>
             </main>
 
         </main>
         <aside class="sidebar">
             <header>
                 <h2>统计信息</h2>
-                <HisotyChart></HisotyChart>
+                <HisotyChart ref="hisotychart" ></HisotyChart>
             </header>
             <main>
-               <div class="fileKindInfo">1</div>
-               <div class="fileKindInfo">2</div>
-               <div class="fileKindInfo">3</div>
-               <div class="fileKindInfo">4</div>
+                <FlieKindInfo v-for="(item, index) in kindInfoList" :imgsInfo="{imgType:item.imgType,kindSize:imgTypeSize[item.imgType]}" :key="'KindInfo' + index">
+                </FlieKindInfo>
             </main>
         </aside>
     </div>
@@ -33,7 +32,10 @@ import globalVariable from '../global/globalVariable';
 import HistorySearch from '../components/HistorySearch';
 import HistoryItem from '../components/HistoryItem';
 import HisotyChart from '../components/HisotyChart.vue';
-import {DataDispose} from'../models';
+import { DataDispose } from '../models';
+import FlieKindInfo from '../components/FlieKindInfo.vue';
+import agency from '../components/agency';
+
 // const mb=1048576;
 export default {
     name: "UploadHistoryPage",
@@ -41,19 +43,62 @@ export default {
         return {
             pageTitle: "上传历史",
             //{ imgName: "图片名字.png",imgType:'png', imgSize: "513KB" }, { imgName: "图片名字2.png",imgType:'png', imgSize: "513KB" }, { imgName: "图片名字3.jpg",imgType:'jpg', imgSize: "513KB" }, { imgName: "图片名字3",imgType:'png', imgSize: "513KB" }, { imgName: "图片名字3",imgType:'tga', imgSize: "513KB" }, { imgName: "图片名字3",imgType:'other', imgSize: "513KB" },{ imgName: "图片名字4",imgType:'other', imgSize: "513KB" },{ imgName: "图片名字4",imgType:'other', imgSize: "513KB" }
-            uploadHistorys: []
+            uploadHistorys: [],
+            kindInfoList: [],
+            imgTypeSize: {png: 1, jpeg: 1, tga: 0, other: 0 }
         }
     },
     components: {
         HistorySearch,
         HistoryItem,
-        HisotyChart
+        HisotyChart,
+        FlieKindInfo
     },
-    methods:{
-      
+    methods: {
+        chartUpdate()
+        {
+            console.log("更新3D饼图"+this.imgTypeSize.png);
+            return this.imgTypeSize;
+        },
+        kindInfoInit(imgTypeList) {
+            imgTypeList.forEach(imgsInfo => {
+                let kindSize = 0;
+                imgsInfo.imgList.forEach(element => {
+                    kindSize += parseFloat(element.imgSize);
+                });
+                this.imgTypeSize[imgsInfo.imgType]=kindSize;
+                
+                // switch (imgsInfo.imgType) {
+                //     case ("image/png"): {
+                //        this.imgTypeSize.pngSize=kindSize;
+                //     }; break;
+                //     case ("image/jpeg"): {
+                //         this.imgTypeSize.jpgSize=kindSize;
+                //     }; break;
+                //     case ("image/x-tga"): {
+                //         this.imgTypeSize.tgaSize=kindSize;
+                //     }; break;
+                //     default: {
+                //         this.imgTypeSize.otherSize=kindSize;
+                //     };
+                // }
+            })
+
+
+
+        }
     },
-    mounted(){
-        this.uploadHistorys=DataDispose.imgDatainits(globalVariable.imgList);
+    mounted() {
+        globalVariable.imgTypeList = DataDispose.imgTypeClassify(globalVariable.imgList);
+        this.uploadHistorys = DataDispose.imgDatainits(globalVariable.imgList);
+        this.kindInfoList = globalVariable.imgTypeList;
+        this.kindInfoInit(globalVariable.imgTypeList);
+        agency.$emit("updateChart",this.imgTypeSize);
+       
+    },
+    watch:
+    {
+       
     }
 }
 </script>
@@ -70,6 +115,7 @@ $appSidebarWidth: 38%;
     top: 2%;
     width: 94%;
     height: 92%;
+
     .sidebar {
         height: 97.5%;
         width: $appSidebarWidth;
@@ -90,28 +136,30 @@ $appSidebarWidth: 38%;
             width: 96%;
             display: flex;
             flex-direction: column;
+
             h2 {
                 height: 9.5%;
             }
+
             background-color: $moduleBgColor;
             padding-left: 2%;
             padding-right: 2%;
-        };
+        }
+
+        ;
+
         main {
             height: 53%;
             width: 100%;
-            margin-bottom:2% ;
+            margin-bottom: 2%;
             display: grid;
             grid-template-rows: auto auto;
             grid-template-columns: auto auto;
-            background-color:$appBgGrayColor;
+            background-color: $appBgGrayColor;
             grid-column-gap: 3px;
             grid-row-gap: 3px;
-           
-            .fileKindInfo{
-                background-color: $moduleBgColor;
-                border-radius: 6px;
-            }
+
+
         }
     }
 
@@ -139,6 +187,7 @@ $appSidebarWidth: 38%;
             border-radius: 6px;
             box-shadow: $boxShadow;
         }
+
         main {
             display: flex;
             position: relative;
@@ -152,8 +201,10 @@ $appSidebarWidth: 38%;
             border-radius: 6px;
             box-shadow: $boxShadow;
             overflow-y: scroll;
-            
-        };
+
+        }
+
+        ;
     }
 
 

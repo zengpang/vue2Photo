@@ -39,6 +39,12 @@ export default {
     ImageItem,
   },
   methods: {
+    imgListClassify(imgList)
+    {
+      imgList.forEach(element => {
+         
+      });
+    },
     Testclick() {
       this.pageShowNumber = 9;
       this.pageShowNumberUpdate();
@@ -130,10 +136,12 @@ export default {
           this.imageSum = this.imgList.length;
           //this.getPageShowNumber();
           //this.pageShowNumber=this.imageSum;
+         
           this.pageShowNumberUpdate();
           agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageShowNumber });
-          console.log(this.imgList);
+         
         })
+
       // FileManager.find({ page: this.selectNumber, limit: this.pageShowNumber })
       //   .then(newList => {
       //     // 1,2,3,4,5,6
@@ -199,7 +207,7 @@ export default {
 
     //this.getpageNowNumer();
     agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageNowNumber });
-
+    
 
   }
 }

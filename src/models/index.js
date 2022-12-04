@@ -133,9 +133,44 @@ const FileManager = {
     }
 
 };
+const mb = 1048576;
 const DataDispose = {
+    imgTypeClassify(imgList) {
+        let imgTypeList = [];
+        let pngList = [];
+        let jpegList = [];
+        let tgaList = [];
+        let otherList = [];
+        imgList.forEach(element => {
+            let fileName = element.attributes.filename;
+            let fileSize = (element.attributes.url.attributes.metaData.size / mb).toFixed(1) ;
+            let fileType = element.attributes.url.attributes.mime_type;
+            let fileUrl = element.attributes.url.attributes.url;
+            let fileInfo = { imgName: fileName, imgType: fileType, imgSize: fileSize, imgUrl: fileUrl };
+            switch (fileType) {
+                case ("image/png"): {
+                    pngList.push(fileInfo);
+                }; break;
+                case ("image/jpeg"): {
+                    jpegList.push(fileInfo);
+                }; break;
+                case ("image/x-tga"): {
+                    tgaList.push(fileInfo);
+                }; break;
+                default: {
+                    otherList.push(fileInfo);
+                };
+            }
+
+        });
+        imgTypeList.push({imgType:"png",imgList:pngList});
+        imgTypeList.push({imgType:"jpeg",imgList:jpegList});
+        imgTypeList.push({imgType:"tga",imgList:tgaList});
+        imgTypeList.push({imgType:"other",imgList:otherList});
+        return imgTypeList;
+    },
     imgDatainits(imgList) {
-        const mb = 1048576;
+
         let dataItems = [];
         imgList.forEach(element => {
             let fileName = element.attributes.filename;
@@ -149,7 +184,7 @@ const DataDispose = {
         return dataItems;
     },
     imgDatainit(item) {
-        const mb = 1048576;
+
 
 
         let fileName = item.attributes.filename;
