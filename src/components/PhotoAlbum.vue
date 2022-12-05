@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       pageShowNumber: 4,//当前单页可显示图片数量的最大值
-      pageNowNumber: 20,//单页显示图片数量
+      pageNowNumber: 1,//单页显示图片数量
 
       selectPage: globalVariable.selectPage,
       imageSum: 1, //图片总数量
@@ -138,7 +138,17 @@ export default {
           //this.pageShowNumber=this.imageSum;
          
           this.pageShowNumberUpdate();
-          agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageShowNumber });
+          if(!globalVariable.isPhotoAlbumed)
+          {
+            agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageShowNumber },false);
+            globalVariable.isPhotoAlbumed=true;
+          }
+          else
+          {
+            agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageShowNumber });
+     
+          }
+         
          
         })
 
@@ -166,13 +176,7 @@ export default {
       //   })
 
     },
-    //获取图片
-    async getimg() {
-
-      await new Promise(() => {
-
-      })
-    }
+   
   },
   watch: {
     imgTableRow(newRow) {
@@ -200,13 +204,14 @@ export default {
   },
   created() {
     agency.$on("pageNumberChange", () => { this.getpageNowNumer(); });
+    agency.$on("updatePhoto",()=>{this.loadimg()})
   },
   mounted() {
 
     this.loadimg();
 
     //this.getpageNowNumer();
-    agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageNowNumber });
+
     
 
   }

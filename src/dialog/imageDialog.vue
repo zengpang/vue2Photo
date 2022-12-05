@@ -1,7 +1,7 @@
 <template>
    <div :class="{ imageDialog: true, hideDialog: !isShow }">
       <div class="imageInfo ">
-         <a @click="closeBtn">&#xe64d;</a>
+         <a @click="closeEvent">&#xe64d;</a>
          <img :src="imgInfo.imgUrl" />
          <h3>图片名字:{{ imgInfo.imgName }} &nbsp;&nbsp;图片类型:{{ imgInfo.imgType }}&nbsp;&nbsp;图片大小:{{ imgInfo.imgSize }}</h3>
       </div>
@@ -22,7 +22,7 @@ export default {
       };
    },
    methods: {
-      closeBtn() {
+      closeEvent() {
          this.isShow = false;
       }
    },

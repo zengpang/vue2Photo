@@ -83,10 +83,10 @@ export default {
       this.light.position.set(165.8, 35.6, 80.6);
       console.log(this.light);
       //告诉点光需要开启阴影投射
-      this.light.castShadow = true;
-      this.light.shadow.bias = -0.000005;
-      this.light.shadow.mapSize.width = 2048; //阴影贴图宽度设置为1024像素
-      this.light.shadow.mapSize.height = 2048; //阴影贴图高度设置为1024像素
+      // this.light.castShadow = true;
+      // this.light.shadow.bias = -0.000005;
+      // this.light.shadow.mapSize.width = 2048; //阴影贴图宽度设置为1024像素
+      // this.light.shadow.mapSize.height = 2048; //阴影贴图高度设置为1024像素
       var ligntCameraHelper = new THREE.SpotLightHelper(this.light, 20);
       ligntCameraHelper.visible = false;
       // let Ambient = new THREE.AmbientLight(0x404040, 2);

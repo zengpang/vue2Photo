@@ -1,7 +1,7 @@
 <template>
     <div v-bind:class="{ loadingDialog: true, hideDialog: !isLoading }">
         <div id="loadingGif" ref="loadingGif">
-            <a>正在加载</a>
+            <a>{{isLoadingTitle}}</a>
         </div>
     </div>
 </template>
@@ -14,12 +14,14 @@ export default {
     name: "LoadingDialog",
     data(){
       return{
-        isLoading:false
+        isLoading:false,
+        isLoadingTitle:"正在加载",
       };
     },
     created(){
-        agency.$on("loadStatusChange", (isLoading) => {
+        agency.$on("loadStatusChange", (isLoading,title="正在加载") => {
             this.isLoading = isLoading;
+            this.isLoadingTitle=title;
         });
     },
     mounted() {

@@ -3,6 +3,7 @@
     <LoadingDialog ref="LoadingDialog" ></LoadingDialog>
     <ImageDialog ref="ImageDialog"></ImageDialog>
     <SearchDialog ref="SearchDialog"></SearchDialog>
+    <UploadDialog ref="UploadDialog"></UploadDialog>
     <HeaderTab></HeaderTab>
     <router-view />
     <!-- <HisotyChartVue></HisotyChartVue> -->
@@ -14,6 +15,7 @@ import LoadingDialog from './dialog/loadingDialog.vue'
 import HeaderTab from './components/HeaderTab'
 import PhotoPage from './views/PhotoPage'
 import ImageDialog from './dialog/imageDialog.vue'
+import UploadDialog from './dialog/UploadDialog.vue'
 import SearchDialog from './dialog/searchDialog.vue'
 export default {
   name: 'App',
@@ -22,7 +24,8 @@ export default {
     PhotoPage,
     LoadingDialog,
     ImageDialog,
-    SearchDialog
+    SearchDialog,
+    UploadDialog
   },
   created() {
     

@@ -1,7 +1,7 @@
 <template>
     <div :class="{ SearchDialog: true, hideDialog: !isShow }">
         <div class="SearchInfo ">
-            <a @click="closeBtn">&#xe64d;</a>
+            <a @click="closeEvent">&#xe64d;</a>
             <h2>搜索结果</h2>
             <div class="SearchResult">
                 <HistoryItem v-for="(uploaditem, uploadindex) in searchList" :key="uploadindex"
@@ -24,7 +24,7 @@ export default {
         };
     },
     methods: {
-        closeBtn() {
+        closeEvent() {
             this.isShow = false;
         }
     },

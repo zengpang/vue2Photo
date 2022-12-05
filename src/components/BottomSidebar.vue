@@ -19,7 +19,7 @@ export default {
             pageNumbers: 1,//总页码
             selectPageNumber: 1,//选中页面页码
             bottomBtnidStr: 'pageBottombtn',//底边数字按钮ref唯一标识字符串
-      
+         
         }
     },
     methods: {
@@ -32,12 +32,17 @@ export default {
         //选中页码更新
         selectPageUpdate() {
             for (let index = 1; index <= this.pageNumbers; index++) {
-
+                try {
                 this.$refs[this.bottomBtnidStr + index][0].classList.remove("fontSelected");
                 this.$refs[this.bottomBtnidStr + index][0].classList.add("fontBottomBtnNormal");
+                } catch (error) {
+                    
+                }
+                
             }
             this.$refs[this.bottomBtnidStr + globalVariable.selectPage][0].classList.remove("fontBottomBtnNormal");
             this.$refs[this.bottomBtnidStr + globalVariable.selectPage][0].classList.add("fontSelected");
+            console.log("页码更新");
             agency.$emit("pageNumberChange");
         },
         //页面切换点击事件
@@ -66,7 +71,7 @@ export default {
     created()
     {
     
-        agency.$on("pageNumberUpdate",(pageinfo)=>
+        agency.$on("pageNumberUpdate",(pageinfo,inited=true)=>
         {
             let oldpageNumbers=this.pageNumbers;
             this.pageNumbers=Math.ceil(pageinfo.imgTotals/pageinfo.imgShows);
@@ -79,9 +84,16 @@ export default {
 
                 globalVariable.selectPage=this.pageNumbers;
                 console.log(this.pageNumbers);
-                this.selectPageUpdate(); 
+              
+                
             }
-         
+            if(inited)
+            {
+                this.selectPageUpdate(); 
+             
+              
+            }
+            
            
             // if(subValue>0)
             // {

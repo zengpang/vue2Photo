@@ -1,16 +1,22 @@
 <template>
-   
+
   <div class="photoPage">
-    
+
     <header>
-      
+
       <h2>{{ pageTitle }}</h2>
       <!-- <button>选中所有</button> -->
-      <div @click="selectAllBtn" v-bind:class="{selectAlled:isSelectAll}" ><input type="checkbox" ref="SelectAllBtn" value="" />选中所有</div>
+      <div class="btns">
+        <div @click="selectAllEvent" v-bind:class="{ btn: true, selectAlled: isSelectAll }"><input type="checkbox"
+            ref="SelectAllBtn" value="" :checked="isSelectAll"/>选中所有</div>
+        <div @click="" v-bind:class="{ btn: true }">上传文件</div>
+        <div @click="" v-bind:class="{ btn: true }">下载选中文件</div>
+      </div>
+
       <!-- <button @click="TestDown" >下载测试</button> -->
     </header>
     <main>
-   
+
       <PhotoAlbum ref="PhotoAlbum"></PhotoAlbum>
     </main>
     <footer>
@@ -23,36 +29,35 @@
 
 import BottomSidebar from '../components/BottomSidebar'
 import PhotoAlbum from '../components/PhotoAlbum'
-import {FileManager} from'../models'
+import { FileManager } from '../models'
+import style from '../assets/style/index.scss';
 
 export default {
   name: 'PhotoPage',
   data() {
     return {
       pageTitle: '首页',
-      isSelectAll:false
+      isSelectAll: false
     }
   },
   components: {
     BottomSidebar,
     PhotoAlbum
   },
-  methods:{
+  methods: {
     //选中所有按钮点击事件
-    selectAllBtn()
-    {
-      this.isSelectAll=!this.isSelectAll;
+    selectAllEvent() {
+      this.isSelectAll = !this.isSelectAll;
       console.log(this.isSelectAll);
     },
-   
-    TestDown()
-    {
-      FileManager.download('http://lc-UQqK42CL.cn-n1.lcfile.com/bb6EBrhWrqXO5HfLdm6j6UmhrHcNGV34/Login_BackGround.jpg','Login_BackGround.jpg');
+
+    TestDown() {
+      FileManager.download('http://lc-UQqK42CL.cn-n1.lcfile.com/bb6EBrhWrqXO5HfLdm6j6UmhrHcNGV34/Login_BackGround.jpg', 'Login_BackGround.jpg');
     }
 
   },
-  created(){
-     
+  created() {
+
   }
 }
 </script>
@@ -75,61 +80,73 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-  
-    div {
-      height: 50px;
-      width: 180px;
-      background-color: $moduleBgColor;
-      font-size: $fontNormalSize;
-      border-radius: 25px;
-      color: $bottomBtnColor;
-      cursor: pointer;
-      font-weight: bold;
-      box-shadow: $boxShadow;
+
+    .btns {
       display: flex;
       flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      transition: all $animTime;
-      input[type="checkbox"]{
-        transition: all $animTime;
-        margin-top: 0px;
-        margin-left: 0px;
-        margin-bottom: 0px;
-        margin-right: 8%;
-        height: 16px;
-        width: 16px;
-        border: 2px solid $bottomBtnColor;
-        border-radius: 3px;
-        cursor: pointer;
-        line-height: 100%;
-        appearance: none;
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        -ms-appearance: none;
-        -o-appearance: none;
-        color: transparent;
-      };
 
-      input[type="checkbox"]:checked {
-        color: $colorHL;
-        border-color: $moduleBgColor;
+      .btn {
+        height: 50px;
+        width: 180px;
         background-color: $moduleBgColor;
-      };
+        font-size: $fontNormalSize;
+        border-radius: 25px;
+        color: $bottomBtnColor;
+        margin-left: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: $boxShadow;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transition: all $animTime;
 
-      input[type="checkbox"]::after {
-        content: "✔";
-      };
-     
+        input[type="checkbox"] {
+          transition: all $animTime;
+          margin-top: 0px;
+          margin-left: 0px;
+          margin-bottom: 0px;
+          margin-right: 8%;
+          height: 16px;
+          width: 16px;
+          border: 2px solid $bottomBtnColor;
+          border-radius: 3px;
+          cursor: pointer;
+          line-height: 100%;
+          appearance: none;
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          -ms-appearance: none;
+          -o-appearance: none;
+          color: transparent;
+        }
 
-    }
-     .selectAlled{
-         background-color:$colorHL;
-         color:  $moduleBgColor;
+        ;
+
+        input[type="checkbox"]:checked {
+          color: $colorHL;
+          border-color: $moduleBgColor;
+          background-color: $moduleBgColor;
+        };
+
+        input[type="checkbox"]::after {
+          content: "✔";
+        };
+
+        
+        
       }
+      .selectAlled {
+          background-color: $colorHL ;
+          color: $moduleBgColor ;
+        }
+    }
+
+
   }
 
   ;
