@@ -12,6 +12,7 @@
    
 <script>
 import agency from './agency';
+import globalVariable from '../global/globalVariable';
 export default {
 
   name: 'HeaderTab',
@@ -25,9 +26,14 @@ export default {
 
     changePageBtn(selectStr) //点击事件
     {
+      
       for (let i = 0; i < this.TabLinks.length; i++) {
         this.isSelected[this.TabLinks[i].tabname] = false;
         if (this.TabLinks[i].tabname == selectStr) {
+          if(this.TabLinks[i].tabname!="首页")
+          {
+            globalVariable.isPhotoShow=false;
+          }
           this.isSelected[this.TabLinks[i].tabname] = true;
         }
       }

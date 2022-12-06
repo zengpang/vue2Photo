@@ -6,7 +6,7 @@
     </header>
     <main :style="imgTableStr">
       <!-- :imgUrl="imgList[(item - 1)].attributes.url.attributes.url" -->
-      <ImageItem v-for="item in pageNowNumber" :imgInfo="ImgInfoValue(item)" :key="item" :data="selectPage">
+      <ImageItem v-for="item in pageNowNumber" :imgInfo="ImgInfoValue(item)" :key="item"   :data="selectPage">
       </ImageItem>
     </main>
     <!-- <button @click="Testclick">测试</button> -->
@@ -39,16 +39,7 @@ export default {
     ImageItem,
   },
   methods: {
-    imgListClassify(imgList)
-    {
-      imgList.forEach(element => {
-         
-      });
-    },
-    Testclick() {
-      this.pageShowNumber = 9;
-      this.pageShowNumberUpdate();
-    },
+   
     ImgInfoValue(itemNumber) {
 
       itemNumber = itemNumber - 1 + (globalVariable.selectPage - 1) * this.pageShowNumber;
@@ -56,10 +47,12 @@ export default {
     
       let itemInfo = this.imgList[itemNumber];
       let imgInfo={imgName:"",imgType:"",imgSize:0,imgUrl:""};
-     
+      
       try {
-        
-         imgInfo=DataDispose.imgDatainit(itemInfo);
+         
+            imgInfo=DataDispose.imgDatainit(itemInfo);
+          
+         
       } catch (error) {
 
       }
@@ -108,7 +101,7 @@ export default {
 
 
       this.pageShowNumber = parseInt(document.getElementById("pageShowImgInput").value);
-      agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageNowNumber });
+      agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageNowNumber },true);
       // console.log(this.pageShowNumber);
       this.pageShowNumberUpdate();
 
@@ -134,6 +127,7 @@ export default {
           isLoading = false;
           agency.$emit("loadStatusChange", isLoading);
           this.imageSum = this.imgList.length;
+          globalVariable.totalImgSum=this.imageSum;
           //this.getPageShowNumber();
           //this.pageShowNumber=this.imageSum;
          
@@ -142,13 +136,21 @@ export default {
           {
             agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageShowNumber },false);
             globalVariable.isPhotoAlbumed=true;
+            
+          }
+          else if(!globalVariable.isPhotoShow)
+          {
+            console.log(globalVariable.isPhotoShow+"页面切回");
+            agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageShowNumber },false);
+            globalVariable.isPhotoShow=true;
+            
           }
           else
           {
-            agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageShowNumber });
-     
-          }
+            agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: this.pageShowNumber },true);
          
+          }
+        
          
         })
 
@@ -195,11 +197,11 @@ export default {
     },
     pageShowNumber(newShowNum) {
 
-      agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: newShowNum });
+      agency.$emit("pageNumberUpdate", { imgTotals: this.imageSum, imgShows: newShowNum },true);
     },
     imageSum(newSum) {
 
-      agency.$emit("pageNumberUpdate", { imgTotals: newSum, imgShows: this.pageNowNumber });
+      agency.$emit("pageNumberUpdate", { imgTotals: newSum, imgShows: this.pageNowNumber },true);
     }
   },
   created() {
@@ -207,9 +209,11 @@ export default {
     agency.$on("updatePhoto",()=>{this.loadimg()})
   },
   mounted() {
-
+ 
     this.loadimg();
 
+  
+     
     //this.getpageNowNumer();
 
     

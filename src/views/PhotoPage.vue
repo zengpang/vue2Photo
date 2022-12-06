@@ -7,10 +7,10 @@
       <h2>{{ pageTitle }}</h2>
       <!-- <button>选中所有</button> -->
       <div class="btns">
-        <div @click="selectAllEvent" v-bind:class="{ btn: true, selectAlled: isSelectAll }"><input type="checkbox"
-            ref="SelectAllBtn" value="" :checked="isSelectAll"/>选中所有</div>
-        <div @click="" v-bind:class="{ btn: true }">上传文件</div>
-        <div @click="" v-bind:class="{ btn: true }">下载选中文件</div>
+        <div @click="selectAllEvent($event)" v-bind:class="{ btn: true, selectAlled: isSelectAll }"><input
+            type="checkbox" ref="SelectAllBtn" value="" :checked="isSelectAll" />{{ selectTitle }}</div>
+        <div @click="uploadShowEvent" v-bind:class="{ btn: true }">上传文件</div>
+        <div @click="downfiles" v-bind:class="{ btn: true }">下载选中文件</div>
       </div>
 
       <!-- <button @click="TestDown" >下载测试</button> -->
@@ -29,15 +29,18 @@
 
 import BottomSidebar from '../components/BottomSidebar'
 import PhotoAlbum from '../components/PhotoAlbum'
-import { FileManager } from '../models'
-import style from '../assets/style/index.scss';
+import { DataDispose, FileManager } from '../models'
+
+import agency from '../components/agency';
+import globalVariable from '../global/globalVariable';
 
 export default {
   name: 'PhotoPage',
   data() {
     return {
       pageTitle: '首页',
-      isSelectAll: false
+      isSelectAll: false,
+      selectTitle: "选中所有"
     }
   },
   components: {
@@ -48,16 +51,63 @@ export default {
     //选中所有按钮点击事件
     selectAllEvent() {
       this.isSelectAll = !this.isSelectAll;
-      console.log(this.isSelectAll);
-    },
+      if (this.isSelectAll && DataDispose.urlnonNullNums().length <= 0) {
+        globalVariable.imgList.forEach(element => {
+          let item = DataDispose.imgDatainit(element);
+          let dlInfo = { imgName: item.imgName, imgUrl: item.imgUrl };
+          globalVariable.dLList.push(dlInfo);
+        });
 
+
+      }
+      else if (this.isSelectAll && DataDispose.urlnonNullNums().length >= 1) {
+
+        globalVariable.dLList = [];
+        globalVariable.imgList.forEach(element => {
+          let item = DataDispose.imgDatainit(element);
+          let dlInfo = { imgName: item.imgName, imgUrl: item.imgUrl };
+          globalVariable.dLList.push(dlInfo);
+        });
+      }
+      else {
+        globalVariable.dLList = [];
+      }
+      globalVariable.isSelectAlled = this.isSelectAll;
+      agency.$emit("selectUpdate", globalVariable.isSelectAlled);
+    },
+    
+    downfiles() {
+
+      if (globalVariable.dLList.length <= 0) {
+        return;
+      }
+      DataDispose.urlnonNullNums().forEach(dlindex=>{
+        FileManager.download(dlindex.imgUrl,dlindex.imgName);
+      })
+     
+    },
+    uploadShowEvent() {
+      agency.$emit("UploadShow", true);
+    },
     TestDown() {
       FileManager.download('http://lc-UQqK42CL.cn-n1.lcfile.com/bb6EBrhWrqXO5HfLdm6j6UmhrHcNGV34/Login_BackGround.jpg', 'Login_BackGround.jpg');
     }
 
   },
   created() {
-
+    agency.$on("selectChange", (status) => {
+      this.isSelectAll = status;
+    })
+  },
+  watch: {
+    isSelectAll(newValue) {
+      if (newValue) {
+        this.selectTitle = "取消选中所有";
+      }
+      else {
+        this.selectTitle = "选中所有";
+      }
+    }
   }
 }
 </script>
@@ -131,19 +181,24 @@ export default {
           color: $colorHL;
           border-color: $moduleBgColor;
           background-color: $moduleBgColor;
-        };
+        }
+
+        ;
 
         input[type="checkbox"]::after {
           content: "✔";
-        };
-
-        
-        
-      }
-      .selectAlled {
-          background-color: $colorHL ;
-          color: $moduleBgColor ;
         }
+
+        ;
+
+
+
+      }
+
+      .selectAlled {
+        background-color: $colorHL ;
+        color: $moduleBgColor ;
+      }
     }
 
 

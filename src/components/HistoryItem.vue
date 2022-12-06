@@ -4,7 +4,7 @@
     <h3>{{ imgName }}</h3>
 
     <div class="filekind type" ref="itemdiv"><label>{{ imgSize }}</label></div>
-
+    
     <a>&#xe600; | <h4 @click="linkBtn">图片链接</h4></a>
   </div>
 </template>
@@ -13,7 +13,6 @@
 import style from '../assets/style/index.scss'
 import agency from './agency';
 
-console.log(style);
 export default {
   props: ['imgName', 'imgType', 'imgSize', 'imgUrl'],
   name: "HistoryItem",

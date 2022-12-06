@@ -1,4 +1,6 @@
 import AV, { Query, User } from 'leancloud-storage';//引入库文件
+import globalVariable from '../global/globalVariable';
+
 /*sdk初始化*/
 AV.init({
     appId: "tmQb7jlJhSjhfdUqbXq77PUD-gzGzoHsz",
@@ -196,7 +198,19 @@ const DataDispose = {
 
 
         return fileInfo;
-    }
+    },
+    urlnonNullNums() {
+     
+        let dlnonNullList=[];
+        globalVariable.dLList.forEach(index => {
+          if (index != null) {
+            dlnonNullList.push(index);
+            
+          }
+        });
+        return dlnonNullList;
+  
+    },
 }
 export {
     FileManager,

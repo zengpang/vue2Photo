@@ -2,16 +2,17 @@
 <template>
     <div class="bottomSidebar">
         <h1 class="previousBtn" @click="pageNAndPBtn(-1)">&#xe62d;</h1>
-        <label class="fontBottomBtnNormal " v-for="pageNumber in parseInt(pageNumbers)" :ref="bottomBtnidStr + pageNumber"
-            @click="pageChangeBtn(pageNumber)" >{{ pageNumber }}</label>
+        <label class="fontBottomBtnNormal " v-for="pageNumber in parseInt(pageNumbers)"
+            :ref="bottomBtnidStr + pageNumber" @click="pageChangeBtn(pageNumber)">{{ pageNumber }}</label>
         <h1 class="nextBtn" @click="pageNAndPBtn(1)">&#xe62d;</h1>
-        
+
     </div>
 </template>
 
 <script>
+
 import globalVariable from '../global/globalVariable';
-import agency from'./agency.js'
+import agency from './agency.js'
 export default {
     name: "BottomSidebar",
     data() {
@@ -19,42 +20,53 @@ export default {
             pageNumbers: 1,//总页码
             selectPageNumber: 1,//选中页面页码
             bottomBtnidStr: 'pageBottombtn',//底边数字按钮ref唯一标识字符串
-         
+
         }
     },
     methods: {
-      
+
         //页面号码更新
         // pageNumberUpdate(pageinfo)
         // {
-           
+
         // },
-        //选中页码更新
-        selectPageUpdate() {
-            for (let index = 1; index <= this.pageNumbers; index++) {
-                try {
-                this.$refs[this.bottomBtnidStr + index][0].classList.remove("fontSelected");
-                this.$refs[this.bottomBtnidStr + index][0].classList.add("fontBottomBtnNormal");
-                } catch (error) {
-                    
+ 
+       
+    
+       async  selectPageUpdate() {
+            console.log(this.pageNumbers + "当前页码数为以上");
+            try {
+                for (let index = 1; index <= this.pageNumbers; index++) {
+
+                    this.$refs[this.bottomBtnidStr + index][0].classList.remove("fontSelected");
+                    this.$refs[this.bottomBtnidStr + index][0].classList.add("fontBottomBtnNormal");
                 }
-                
+            } catch (error) {
+
             }
-            this.$refs[this.bottomBtnidStr + globalVariable.selectPage][0].classList.remove("fontBottomBtnNormal");
-            this.$refs[this.bottomBtnidStr + globalVariable.selectPage][0].classList.add("fontSelected");
-            console.log("页码更新");
+            let self=this;      
+            await setTimeout(()=>{
+             try{
+                self.$refs[this.bottomBtnidStr + globalVariable.selectPage][0].classList.remove("fontBottomBtnNormal");
+                self.$refs[this.bottomBtnidStr + globalVariable.selectPage][0].classList.add("fontSelected");
+             }catch(error){
+
+             }
+            },0)//保证页面渲染完成后才执行
             agency.$emit("pageNumberChange");
+
+
         },
         //页面切换点击事件
         pageChangeBtn(pageNumber) {
             globalVariable.selectPage = pageNumber;
             this.selectPageUpdate();
-           // agency.$emit("pageNumberChange");
+            // agency.$emit("pageNumberChange");
         },
         //页面上下页切换按钮点击事件
         pageNAndPBtn(jumpPageNum) {
             switch (true) {
-                case (globalVariable.selectPage<= 1 && jumpPageNum < 0): {
+                case (globalVariable.selectPage <= 1 && jumpPageNum < 0): {
                     return;
                 };
                 case (globalVariable.selectPage >= this.pageNumbers && jumpPageNum > 0): {
@@ -63,38 +75,36 @@ export default {
             }
             globalVariable.selectPage += jumpPageNum;
             this.selectPageUpdate();
-          //  agency.$emit("pageNumberChange");
+            //  agency.$emit("pageNumberChange");
         }
     },
-    watch:{
+    watch: {
     },
-    created()
-    {
-    
-        agency.$on("pageNumberUpdate",(pageinfo,inited=true)=>
-        {
-            let oldpageNumbers=this.pageNumbers;
-            this.pageNumbers=Math.ceil(pageinfo.imgTotals/pageinfo.imgShows);
-           
-            let subValue=oldpageNumbers-this.pageNumbers;
-            console.log("当前页数为"+this.pageNumbers);
-           
-            if(globalVariable.selectPage>this.pageNumbers)
-            {
+    created() {
 
-                globalVariable.selectPage=this.pageNumbers;
+        agency.$on("pageNumberUpdate", (pageinfo, inited) => {
+            let oldpageNumbers = this.pageNumbers;
+            this.pageNumbers = Math.ceil(pageinfo.imgTotals / pageinfo.imgShows);
+
+            let subValue = oldpageNumbers - this.pageNumbers;
+            console.log("当前页数为" + this.pageNumbers);
+
+            if (globalVariable.selectPage > this.pageNumbers) {
+
+                globalVariable.selectPage = this.pageNumbers;
                 console.log(this.pageNumbers);
-              
-                
+
+
             }
-            if(inited)
-            {
-                this.selectPageUpdate(); 
-             
-              
+
+            if (inited) {
+                console.log("触发");
+                this.selectPageUpdate();
+
+
             }
-            
-           
+
+
             // if(subValue>0)
             // {
             //     // globalVariable.selectPage=1;
@@ -103,17 +113,17 @@ export default {
             //     this.selectPageUpdate();
             //    console.log("差值为"+subValue)
             // }
-            
-            
+
+
         });
         // agency.$on("getSelectNumber",(callback)=>{
         //     callback(globalVariable.selectPage);
         // })
     },
     mounted() {
-        this.selectPageUpdate();
+        //  this.selectPageUpdate();
     }
-    
+
 }
 </script>
 

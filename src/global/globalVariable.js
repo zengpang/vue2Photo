@@ -5,5 +5,10 @@ export default {
     imgTypeList:[],
     imgTypeSize:{pngSize:0.0,jpgSize:0.0,tgaSize:0.0,otherSize:0.0},
     is3DRendered:false,
-    isPhotoAlbumed:false
+    isPhotoAlbumed:false,
+    isPhotoShow:true,
+    isSelectAlled:false,
+    isMustSelect:false,
+    totalImgSum:1,
+    dLList:[]
   }

@@ -6,8 +6,6 @@
                 <h2>上传文件</h2>
                 <label>上传图片文件</label>
             </div>
-
-
             <input type="file" id="uploadfile" @input="UploadEvent($event)"  accept="image/*" />
             <div id="uploadDiv" @click="UploadBtnEvent">
                 <a class="icon">&#xe60b;</a> 
@@ -25,7 +23,7 @@ export default {
     name: "UploadDialog",
     data() {
         return {
-            isUpload: true,
+            isUpload: false,
             isUploading:false,
           
         };
@@ -66,11 +64,14 @@ export default {
             }).catch(err=>{
                 console.log(`上传发生错误${err}`);
                 alert('上传失败');
+                this.isUploading=false;
+                agency.$emit("loadStatusChange",this.isUploading,"正在上传");
             }).finally(()=>{
                 this.isUploading=false;
                 agency.$emit("loadStatusChange",this.isUploading,"正在上传");
                 alert(`文件${file.name}上传成功`);
                 agency.$emit("updatePhoto")
+                agency.$emit("selectChange",false);
             })
            })
         }
@@ -102,7 +103,7 @@ export default {
 }
 
 #uploadContent {
-    width: 45%;
+    width: 40%;
     height: 55%;
 
     background-color: white;
