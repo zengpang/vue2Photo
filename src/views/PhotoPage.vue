@@ -134,7 +134,7 @@ export default {
     .btns {
       display: flex;
       flex-direction: row;
-
+      
       .btn {
         height: 50px;
         width: 180px;
@@ -190,11 +190,15 @@ export default {
         }
 
         ;
-
+        
 
 
       }
-
+      div:hover{
+           
+            background-color:$colorHL;
+            color: $moduleBgColor ;
+      }
       .selectAlled {
         background-color: $colorHL ;
         color: $moduleBgColor ;
