@@ -24,15 +24,6 @@ export default {
         }
     },
     methods: {
-
-        //页面号码更新
-        // pageNumberUpdate(pageinfo)
-        // {
-
-        // },
- 
-       
-    
        async  selectPageUpdate() {
             console.log(this.pageNumbers + "当前页码数为以上");
             try {

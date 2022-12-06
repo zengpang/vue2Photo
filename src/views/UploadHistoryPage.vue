@@ -67,25 +67,8 @@ export default {
                     kindSize += parseFloat(element.imgSize);
                 });
                 this.imgTypeSize[imgsInfo.imgType]=kindSize;
-                
-                // switch (imgsInfo.imgType) {
-                //     case ("image/png"): {
-                //        this.imgTypeSize.pngSize=kindSize;
-                //     }; break;
-                //     case ("image/jpeg"): {
-                //         this.imgTypeSize.jpgSize=kindSize;
-                //     }; break;
-                //     case ("image/x-tga"): {
-                //         this.imgTypeSize.tgaSize=kindSize;
-                //     }; break;
-                //     default: {
-                //         this.imgTypeSize.otherSize=kindSize;
-                //     };
-                // }
+           
             })
-
-
-
         }
     },
     mounted() {
@@ -94,10 +77,6 @@ export default {
         this.kindInfoList = globalVariable.imgTypeList;
         this.kindInfoInit(globalVariable.imgTypeList);
         agency.$emit("updateChart",this.imgTypeSize);
-       
-    },
-    watch:
-    {
        
     }
 }

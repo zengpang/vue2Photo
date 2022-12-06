@@ -12,20 +12,15 @@ import {DataDispose} from'../models';
 export default {
     name: 'HistorySearch',
     methods: {
-        async seachImg(event) {
-
+        async seachImg() {
             let seachValue = document.querySelector("#seachInput").value;
             let seachResult = [];
             globalVariable.imgList.forEach(element => {
                 let fileName = element.attributes.filename;
-
                 let reg = RegExp(seachValue + "\.");
                 if (fileName.match(reg)) {
-                    // seachResultNames=fileName
                     seachResult.push(element);
-                    //   console.log(fileName.match(reg))
                 }
-
             });
             if (seachResult.length >= 0) {
                 seachResult=DataDispose.imgDatainits(seachResult);

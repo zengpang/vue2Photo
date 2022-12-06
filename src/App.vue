@@ -44,7 +44,7 @@ export default {
   top: 3%;
   left: 10%;
   right: 10%;
-  width: 80%;
+  width: 75%;
   height: 95%;
   background-color: $appBgColor;
   float: left;

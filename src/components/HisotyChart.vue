@@ -5,7 +5,7 @@
 </template>
 <style scoped lang="scss">
 .hisotyChart {
-  width: 90%;
+  width: 100%;
   height: 100%;
   // height: 100vh;
   // width: 100vw;

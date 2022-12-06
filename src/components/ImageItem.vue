@@ -14,32 +14,13 @@ export default {
     props: ['imgInfo'],
     data() {
         return {
-
             url: this.imgInfo.imgUrl,
             isSelected: false,
-
         }
     },
     methods: {
         imgSrcEvent(imgUrl) {
-
-            // this.isSelected=false;
-            // globalVariable.dLList.forEach(element => {
-            //     if (element != null) {
-            //         if ( element.imgUrl == imgUrl) {
-            //             this.isSelected = true;
-            //             console.log("匹配成功");
-            //             return;
-            //         }
-            //         // else
-            //         // {
-            //         //     this.isSelected=false;
-            //         // }
-            //     }
-
-
-            // })
-            this.url=imgUrl;
+            this.url = imgUrl;
             return imgUrl;
         },
         selectEvent(boolVaule) {
@@ -54,13 +35,12 @@ export default {
         addDLEvent(event) {
 
             this.isSelected = !this.isSelected;
-            
+
             if (this.isSelected) {
                 let dlInfo = { imgName: this.imgInfo.imgName, imgUrl: this.imgInfo.imgUrl };
                 globalVariable.dLList.push(dlInfo);
-                if(DataDispose.urlnonNullNums().length>=globalVariable.totalImgSum)
-                {
-                    agency.$emit("selectChange",true);
+                if (DataDispose.urlnonNullNums().length >= globalVariable.totalImgSum) {
+                    agency.$emit("selectChange", true);
                 }
             }
             else {
@@ -68,7 +48,7 @@ export default {
                 if (globalVariable.dLList.length <= 0) {
                     return;
                 }
-                agency.$emit("selectChange",false);
+                agency.$emit("selectChange", false);
                 for (let index = 0; index < globalVariable.dLList.length; index++) {
 
                     if (globalVariable.dLList[index] != null) {
@@ -86,38 +66,14 @@ export default {
         }
     },
     watch: {
-        isSelected(newValue) {
-            // if (newValue && !globalVariable.isMustSelect) {
-            //     let dlInfo = { imgName: this.imgInfo.imgName, imgUrl: this.imgInfo.imgUrl };
-            //     globalVariable.dLList.push(dlInfo);
 
-
-            // }
-            // else if (!newValue) {
-            //     for (let index = 0; index < globalVariable.dLList.length; index++) {
-
-            //         if (globalVariable.dLList[index] != null) {
-
-            //             if (globalVariable.dLList[index].imgUrl == this.imgInfo.imgUrl) {
-            //                 delete globalVariable.dLList[index];
-
-            //                 return;
-            //             }
-            //         }
-
-            //     }
-            //     console.log(globalVariable.dLList);
-            // }
-            console.log("isSelected正在变化");
-        },
-        url(newUrl)
-        {
+        url(newUrl) {
             this.isSelected = false;
             globalVariable.dLList.forEach(element => {
                 if (element != null) {
                     if (element.imgUrl == newUrl) {
                         this.isSelected = true;
-                        console.log(element.imgUrl+" "+newUrl);
+                        console.log(element.imgUrl + " " + newUrl);
                         console.log("匹配成功");
                         return;
                     }
@@ -131,33 +87,23 @@ export default {
         agency.$on("selectUpdate", (selectStatus) => {
             this.isSelected = selectStatus;
         });
-      
-        // globalVariable.dLList.forEach(element => {
-        //         if (element != null) {
-        //             if ( element.imgUrl == imgInfo.imgUrl) {
-        //                 imgInfo.imgSelected = true;
 
-        //                 return;
-        //             }
 
-        //         }
-        //       }
-        //     )
     },
     mounted() {
         this.isSelected = false;
-            globalVariable.dLList.forEach(element => {
-                if (element != null) {
-                    if (element.imgUrl == this.url) {
-                        this.isSelected = true;
-                        console.log(element.imgUrl+" "+this.url);
-                        console.log("匹配成功");
-                        return;
-                    }
-
+        globalVariable.dLList.forEach(element => {
+            if (element != null) {
+                if (element.imgUrl == this.url) {
+                    this.isSelected = true;
+                    console.log(element.imgUrl + " " + this.url);
+                 
+                    return;
                 }
+
             }
-            )
+        }
+        )
     }
 
 }
