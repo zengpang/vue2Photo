@@ -2,7 +2,7 @@
     <div class="fileKindInfo" scoped lang="scss">
         <div class="icon" ref="kindinfoicon">{{kindName}}</div>
         <a>{{ kindName }}</a>
-        <div class="totalSize">{{ kindSize }}<label>GB</label></div>
+        <div class="totalSize">{{ kindSize }}<label>MB</label></div>
     </div>
 </template>
 <script>
@@ -47,7 +47,7 @@ export default {
             //     this.kindSize+=parseFloat(element.imgSize);
                 
             // });
-            this.kindSize=(this.imgsInfo.kindSize/gb).toFixed(3);
+            this.kindSize=(this.imgsInfo.kindSize).toFixed(1);
             
         }
     },

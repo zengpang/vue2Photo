@@ -6,10 +6,10 @@
                 <h2>上传文件</h2>
                 <label>上传图片文件</label>
             </div>
-            <input type="file" id="uploadfile" @input="UploadEvent($event)"  accept="image/*" />
+            <input type="file" id="uploadfile" @input="UploadEvent($event)" accept="image/*" />
             <div id="uploadDiv" @click="UploadBtnEvent">
-                <a class="icon">&#xe60b;</a> 
-                <h3>点击按钮选择上传文件(文件大小)</h3>
+                <a class="icon">&#xe60b;</a>
+                <h3>点击按钮选择上传文件(文件大小限制为5MB以内)</h3>
                 <button>选择文件</button>
             </div>
         </div>
@@ -24,58 +24,62 @@ export default {
     data() {
         return {
             isUpload: false,
-            isUploading:false,
-          
+            isUploading: false,
+
         };
     },
     created() {
         agency.$on("UploadShow", (isUpload) => {
             this.isUpload = isUpload;
         });
-        
+
     },
     mounted() {
     },
     methods: {
         closeEvent() {
-            
+
             this.isUpload = false;
         },
         UploadBtnEvent() {
+
             document.getElementById("uploadfile").click();
-     
+
         },
-        UploadEvent(event)
-        {
+        UploadEvent(event) {
             console.log(event.target.files[0]);
-            let UploadFile=event.target.files[0];
-              this.UploadFile(UploadFile);
-           
+            let UploadFile = event.target.files[0];
+            let fileSize = event.target.files[0].size;
+            if (fileSize >= (1048576 * 5)) {
+                alert("文件过大");
+                return;
+            }
+            this.UploadFile(UploadFile);
+
         },
-        UploadFile(file)
-        {
-           console.log("执行上传");
-           this.isUploading=true;
-           agency.$emit("loadStatusChange",this.isUploading,"正在上传");
-           return new Promise(()=>{
-            FileManager.Upload(file,file.name)
-            .then(()=>{
-                
-            }).catch(err=>{
-                console.log(`上传发生错误${err}`);
-                alert('上传失败');
-                this.isUploading=false;
-                agency.$emit("loadStatusChange",this.isUploading,"正在上传");
-            }).finally(()=>{
-                this.isUploading=false;
-                agency.$emit("loadStatusChange",this.isUploading,"正在上传");
-                alert(`文件${file.name}上传成功`);
-                agency.$emit("updatePhoto")
-                agency.$emit("selectChange",false);
+        UploadFile(file) {
+            console.log("执行上传");
+            this.isUploading = true;
+            agency.$emit("loadStatusChange", this.isUploading, "正在上传");
+            return new Promise(() => {
+                FileManager.Upload(file, file.name)
+                    .then(() => {
+
+                    }).catch(err => {
+                        console.log(`上传发生错误${err}`);
+                        alert('上传失败');
+                        this.isUploading = false;
+                        agency.$emit("loadStatusChange", this.isUploading, "正在上传");
+                    }).finally(() => {
+                        this.isUploading = false;
+                        agency.$emit("loadStatusChange", this.isUploading, "正在上传");
+                        alert(`文件${file.name}上传成功`);
+                        agency.$emit("updatePhoto")
+                        agency.$emit("selectChange", false);
+                    })
             })
-           })
         }
-       
+
 
     }
 }
@@ -99,7 +103,7 @@ export default {
     right: 0;
     top: 0;
     z-index: 15;
-  
+
 }
 
 #uploadContent {
@@ -165,21 +169,24 @@ export default {
         align-self: center;
         display: flex;
         flex-direction: column;
-       
+
         justify-content: center;
         align-items: center;
         border: 3px solid transparent;
         border-radius: 8px;
-        background: linear-gradient(white,  $colorNormal) padding-box,
+        background: linear-gradient(white, $colorNormal) padding-box,
             repeating-linear-gradient(-45deg, #ccc 0, $colorHL 0.3em, white 0, white 0.45em);
-        .icon{
+
+        .icon {
             font-size: 121px;
             color: $bottomBtnColor;
         }
-        h3{
+
+        h3 {
             color: $bottomBtnColor;
         }
-        button{
+
+        button {
             width: 150px;
             height: 40px;
             border-radius: 5px;
@@ -192,15 +199,16 @@ export default {
             box-shadow: $btnShadow;
             transition: all $animTime;
         }
-        button:hover{
+
+        button:hover {
             box-shadow: $btnSelectShadow;
-            background-color:$colorHL;
+            background-color: $colorHL;
         }
     }
 }
 
 .hideDialog {
- 
+
     display: none;
 }
 </style>

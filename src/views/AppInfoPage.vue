@@ -11,7 +11,7 @@
            <a>邮箱地址:2516629927@qq.com</a>
            <a target="_blank" href="https://github.com/zengpang/vue2Photo">工程地址:https://github.com/zengpang/vue2Photo</a>
            <a target="_blank" href="https://zengpang.github.io/vue2PhotoDemo/#/home">预览地址(github):https://zengpang.github.io/vue2PhotoDemo/#/home</a>
-           <a target="_blank" href="https://zengpang.github.io/vue2PhotoDemo/#/home">预览地址(github):https://zengpang.github.io/vue2PhotoDemo/#/home</a>
+           <a target="_blank" href="https://github.com/zengpang">个人github地址:https://github.com/zengpang</a>
         </main>
         <footer>
            

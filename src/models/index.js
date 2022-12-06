@@ -145,7 +145,7 @@ const DataDispose = {
         let otherList = [];
         imgList.forEach(element => {
             let fileName = element.attributes.filename;
-            let fileSize = (element.attributes.url.attributes.metaData.size / mb).toFixed(1) ;
+            let fileSize = (element.attributes.url.attributes.metaData.size / mb).toFixed(2) ;
             let fileType = element.attributes.url.attributes.mime_type;
             let fileUrl = element.attributes.url.attributes.url;
             let fileInfo = { imgName: fileName, imgType: fileType, imgSize: fileSize, imgUrl: fileUrl };
@@ -176,7 +176,7 @@ const DataDispose = {
         let dataItems = [];
         imgList.forEach(element => {
             let fileName = element.attributes.filename;
-            let fileSize = (element.attributes.url.attributes.metaData.size / mb).toFixed(1) + "MB";
+            let fileSize = (element.attributes.url.attributes.metaData.size / mb).toFixed(2) + "MB";
             let fileType = element.attributes.url.attributes.mime_type;
             let fileUrl = element.attributes.url.attributes.url;
             let fileInfo = { imgName: fileName, imgType: fileType, imgSize: fileSize, imgUrl: fileUrl };
@@ -190,7 +190,7 @@ const DataDispose = {
 
 
         let fileName = item.attributes.filename;
-        let fileSize = (item.attributes.url.attributes.metaData.size / mb).toFixed(1) + "MB";
+        let fileSize = (item.attributes.url.attributes.metaData.size / mb).toFixed(2) + "MB";
         let fileType = item.attributes.url.attributes.mime_type;
         let fileUrl = item.attributes.url.attributes.url;
         let fileInfo = { imgName: fileName, imgType: fileType, imgSize: fileSize, imgUrl: fileUrl };
